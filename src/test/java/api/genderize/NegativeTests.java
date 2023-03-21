@@ -11,12 +11,12 @@ import static io.restassured.RestAssured.given;
 
 public class NegativeTests  extends Specifications {
 
-    private final static String URL = "https://api.genderize.io";
+//    private final static String URL = "https://api.genderize.io";
     private final static String expectedTextError = "Missing 'name' parameter";
 
     @Test
     void checkWithMissingParameter(){
-        Specifications.installSpecification(Specifications.requestSpec(URL), Specifications.responseSpecUNIQUE(422));
+        Specifications.installSpecification(Specifications.requestSpec(), Specifications.responseSpecUNIQUE(422));
         MissingParameter missingParameter = RestAssured
                 .get()
                 .then()
@@ -26,7 +26,7 @@ public class NegativeTests  extends Specifications {
 
     @Test
     void checkSwapKeyValue(){
-        Specifications.installSpecification(Specifications.requestSpec(URL), Specifications.responseSpecUNIQUE(422));
+        Specifications.installSpecification(Specifications.requestSpec(), Specifications.responseSpecUNIQUE(422));
         MissingParameter missingParameter = RestAssured
                 .given()
                 .queryParam("vladislav", "name")

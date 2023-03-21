@@ -8,11 +8,13 @@ import io.restassured.filter.log.ResponseLoggingFilter;
 import io.restassured.http.ContentType;
 import io.restassured.specification.RequestSpecification;
 import io.restassured.specification.ResponseSpecification;
-public class Specifications {
 
-    public static RequestSpecification requestSpec(String url){
+import static io.restassured.RestAssured.given;
+public class Specifications {
+    private final static String URL = "https://api.genderize.io/";
+    public static RequestSpecification requestSpec(){
         return new RequestSpecBuilder()
-                .setBaseUri(url)
+                .setBaseUri(URL)
                 .setContentType(ContentType.JSON)
                 .setAccept(ContentType.JSON)
                 .log(LogDetail.ALL)
