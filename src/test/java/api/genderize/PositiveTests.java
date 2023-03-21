@@ -25,12 +25,27 @@ public class PositiveTests extends Specifications {
         GenderData genderData = RestAssured
                 .given()
 //                .queryParam("name", "vladislav")
-                .queryParam(QueryParameters.name, QueryParameters.vladislav)
+                .queryParam(QueryParameters.name, QueryParameters.latinNameVladislav)
                 .when()
                 .get()
                 .then()
                 .extract().as(GenderData.class);
         Assert.assertEquals(genderData.getGender(), gender);
-        Assert.assertEquals(genderData.getName(), QueryParameters.name);
+        Assert.assertEquals(genderData.getName(), QueryParameters.latinNameVladislav);
     }
+
+    @Test
+    public void checkResultWithCyrillicName(){
+        Specifications.installSpecification(Specifications.requestSpec(URL), Specifications.responseSpecOK200());
+        GenderData genderData = RestAssured
+                .given()
+                .queryParam(QueryParameters.name, QueryParameters.cyrillicNameVladislav)
+                .when()
+                .get()
+                .then()
+                .extract().as(GenderData.class);
+        Assert.assertEquals(genderData.getGender(), gender);
+        Assert.assertEquals(genderData.getName(), QueryParameters.cyrillicNameVladislav);
+    }
+
 }
