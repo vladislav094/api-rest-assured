@@ -15,7 +15,8 @@ public class Specifications {
                 .setBaseUri(url)
                 .setContentType(ContentType.JSON)
                 .setAccept(ContentType.JSON)
-                .log(LogDetail.URI).log(LogDetail.BODY)
+                .log(LogDetail.ALL)
+//                .log(LogDetail.URI).log(LogDetail.BODY)
                 .addFilter(new ResponseLoggingFilter())
                 .build();
     }
