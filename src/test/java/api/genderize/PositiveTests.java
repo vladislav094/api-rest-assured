@@ -2,16 +2,12 @@ package api.genderize;
 
 import api.genderize.genders.GenderData;
 import api.genderize.genders.QueryParameters;
-import io.restassured.RestAssured;
-
+import api.genderize.genders.ResponseValues;
 import api.genderize.specification.Specifications;
-
+import io.restassured.RestAssured;
+import io.restassured.response.Response;
 import org.testng.Assert;
 import org.testng.annotations.Test;
-
-import java.lang.reflect.Type;
-import java.util.List;
-import java.util.stream.Collectors;
 
 public class PositiveTests extends Specifications {
 
@@ -22,20 +18,21 @@ public class PositiveTests extends Specifications {
      Or define it in this class as shown below
     */
 //    private final static String URL = "https://api.genderize.io/";
-    private final static String gender = "male";
 
     @Test
     public void checkSuccessResultWithParameter(){
         Specifications.installSpecification(Specifications.requestSpec(), Specifications.responseSpecOK200());
         GenderData genderData = RestAssured
                 .given()
-                .queryParam(QueryParameters.keyName, QueryParameters.latinNameVladislav)
+                .queryParam(QueryParameters.keyName, QueryParameters.valueLatinName)
                 .when()
                 .get()
                 .then()
                     .extract().as(GenderData.class);
-        Assert.assertEquals(genderData.getGender(), gender);
-        Assert.assertEquals(genderData.getName(), QueryParameters.latinNameVladislav);
+        Assert.assertNotNull(genderData.getCount());
+        Assert.assertEquals(genderData.getGender(), ResponseValues.valueGenderMale);
+        Assert.assertEquals(genderData.getName(), QueryParameters.valueLatinName);
+        Assert.assertNotNull(genderData.getProbability());
     }
 
     @Test
@@ -43,24 +40,48 @@ public class PositiveTests extends Specifications {
         Specifications.installSpecification(Specifications.requestSpec(), Specifications.responseSpecOK200());
         GenderData genderData = RestAssured
                 .given()
-                .queryParam(QueryParameters.keyName, QueryParameters.cyrillicNameVladislav)
+                .queryParam(QueryParameters.keyName, QueryParameters.valueCyrillicName)
                 .when()
                 .get()
                 .then()
                 .extract().as(GenderData.class);
-        Assert.assertEquals(genderData.getGender(), gender);
-        Assert.assertEquals(genderData.getName(), QueryParameters.cyrillicNameVladislav);
+        Assert.assertNotNull(genderData.getCount());
+        Assert.assertEquals(genderData.getGender(), ResponseValues.valueGenderMale);
+        Assert.assertEquals(genderData.getName(), QueryParameters.valueCyrillicName);
+        Assert.assertNotNull(genderData.getProbability());
     }
 
     @Test
-    public void checkDataTypeInTheResponseValues(){
+    public void checkValueCorrespondExpectedData(){
         Specifications.installSpecification(Specifications.requestSpec(), responseSpecOK200());
         GenderData genderData = RestAssured
                 .given()
-                .queryParam(QueryParameters.keyName, QueryParameters.latinNameVladislav)
+                .queryParam(QueryParameters.keyName, QueryParameters.valueLatinName)
                 .when()
                 .get()
                 .then()
                 .extract().as(GenderData.class);
+        Assert.assertEquals(genderData.getCount(),ResponseValues.valueCountForVladislav);
+        Assert.assertEquals(genderData.getGender(), ResponseValues.valueGenderMale);
+        Assert.assertEquals(genderData.getName(), ResponseValues.valueVladislav);
+        Assert.assertEquals(genderData.getProbability(), ResponseValues.valueProbabilityForVladislav);
     }
+
+    @Test
+    public void checkResponseHeaders(){
+        Specifications.installSpecification(requestSpec(), responseSpecOK200());
+        Response response = RestAssured
+                .given()
+                .queryParam(QueryParameters.keyName, QueryParameters.valueLatinName)
+                .when()
+                .get()
+                .then()
+                .extract().response();
+        String responseBodyLength = response.getBody().asString();
+        Assert.assertEquals(response.getHeader("Content-Type"), "application/json; charset=utf-8");
+        Assert.assertTrue(Integer.parseInt(response.getHeader("x-rate-limit-remaining").trim()) > 0);
+        Assert.assertEquals(responseBodyLength.length(), Integer.parseInt(response.getHeader("Content-Length").trim()));
+
+    }
+
 }

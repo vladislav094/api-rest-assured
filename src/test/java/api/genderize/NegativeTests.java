@@ -2,15 +2,18 @@ package api.genderize;
 
 import api.genderize.genders.MissingParameter;
 import api.genderize.specification.Specifications;
-
 import io.restassured.RestAssured;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
-import static io.restassured.RestAssured.given;
+public class NegativeTests extends Specifications {
 
-public class NegativeTests  extends Specifications {
-
+    /*
+     Identified baseURL in the public class Specifications.
+     We can also create an setUp() method with an
+     annotation @BeforeClass and put the baseURL there.
+     Or define it in this class as shown below
+    */
 //    private final static String URL = "https://api.genderize.io";
     private final static String expectedTextError = "Missing 'name' parameter";
 
@@ -35,7 +38,6 @@ public class NegativeTests  extends Specifications {
                 .then()
                 .extract().as(MissingParameter.class);
         Assert.assertEquals(missingParameter.getError(), expectedTextError);
-
     }
 
 }
