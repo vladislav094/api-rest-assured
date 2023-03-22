@@ -1,12 +1,13 @@
 package api.genderize.genders;
+import java.io.Serializable;
 
-public class GenderData {
+public class GenderData implements Serializable{
     private Integer count;
     private String gender;
     private String name;
-    private Integer probability;
+    private Float probability;
 
-    public GenderData(Integer count, String gender, String name, Integer probability) {
+    public GenderData(Integer count, String gender, String name, Float probability) {
         this.count = count;
         this.gender = gender;
         this.name = name;
@@ -30,7 +31,7 @@ public class GenderData {
         return name;
     }
 
-    public Integer getProbability() {
+    public Float getProbability() {
         return probability;
     }
 
@@ -48,7 +49,45 @@ public class GenderData {
         this.name = name;
     }
 
-    public void setProbability(Integer probability) {
+    public void setProbability(Float probability) {
         this.probability = probability;
+    }
+
+    public boolean isMale(){
+        return "male".equals(this.getGender());
+    }
+    public boolean isFemale(){
+        return "female".equals(this.getGender());
+    }
+
+    public boolean isVladislavName(String alphabet){
+        if (alphabet.equals("latin")){
+            return QueryParameters.valueLatinName.equals(this.getName());
+        }
+
+        if (alphabet.equals("cyrillic")){
+            return QueryParameters.valueCyrillicName.equals(this.getName());
+        }
+        else {return false;}
+    }
+
+    public boolean isProbabilityForVladislav(String alphabet){
+        if (alphabet.equals("latin")) {
+            return ResponseValues.valueProbabilityForVladislav.equals(this.getProbability());
+        }
+        if (alphabet.equals("cyrillic")){
+            return ResponseValues.valueProbabilityForCyrillicVladislav.equals(this.getProbability());
+        }
+        else {return false;}
+    }
+
+    public boolean isCountForVladislav(String alphabet){
+        if (alphabet.equals("latin")) {
+            return ResponseValues.valueCountForVladislav.equals(this.getCount());
+        }
+        if (alphabet.equals("cyrillic")){
+            return ResponseValues.valueCountForCyrillicVladislav.equals(this.getCount());
+        }
+        else {return false;}
     }
 }

@@ -1,6 +1,7 @@
 package api.genderize;
 
 import api.genderize.genders.GenderData;
+import api.genderize.genders.HelperData;
 import api.genderize.genders.QueryParameters;
 import api.genderize.genders.ResponseValues;
 import api.genderize.specification.Specifications;
@@ -38,10 +39,10 @@ public class PositiveTests extends Specifications {
                 .get()
                 .then()
                 .extract().as(GenderData.class);
-        Assert.assertNotNull(genderData.getCount());
-        Assert.assertEquals(genderData.getGender(), ResponseValues.valueGenderMale);
-        Assert.assertEquals(genderData.getName(), QueryParameters.valueLatinName);
-        Assert.assertNotNull(genderData.getProbability());
+        Assert.assertTrue(genderData.isCountForVladislav(HelperData.latinName));
+        Assert.assertTrue(genderData.isMale());
+        Assert.assertTrue(genderData.isVladislavName(HelperData.latinName));
+        Assert.assertTrue(genderData.isProbabilityForVladislav(HelperData.latinName));
     }
 
     @Test
@@ -54,10 +55,10 @@ public class PositiveTests extends Specifications {
                 .get()
                 .then()
                 .extract().as(GenderData.class);
-        Assert.assertNotNull(genderData.getCount());
-        Assert.assertEquals(genderData.getGender(), ResponseValues.valueGenderMale);
-        Assert.assertEquals(genderData.getName(), QueryParameters.valueCyrillicName);
-        Assert.assertNotNull(genderData.getProbability());
+        Assert.assertTrue(genderData.isCountForVladislav(HelperData.cyrillicName));
+        Assert.assertTrue(genderData.isMale());
+        Assert.assertTrue(genderData.isVladislavName(HelperData.cyrillicName));
+        Assert.assertTrue(genderData.isProbabilityForVladislav(HelperData.cyrillicName));
     }
 
     @Test
@@ -70,10 +71,10 @@ public class PositiveTests extends Specifications {
                 .get()
                 .then()
                 .extract().as(GenderData.class);
-        Assert.assertEquals(genderData.getCount(),ResponseValues.valueCountForVladislav);
-        Assert.assertEquals(genderData.getGender(), ResponseValues.valueGenderMale);
-        Assert.assertEquals(genderData.getName(), ResponseValues.valueVladislav);
-        Assert.assertEquals(genderData.getProbability(), ResponseValues.valueProbabilityForVladislav);
+        Assert.assertTrue(genderData.isCountForVladislav(HelperData.latinName));
+        Assert.assertTrue(genderData.isMale());
+        Assert.assertTrue(genderData.isVladislavName(HelperData.latinName));
+        Assert.assertTrue(genderData.isProbabilityForVladislav(HelperData.latinName));
     }
 
     @Test
@@ -125,4 +126,20 @@ public class PositiveTests extends Specifications {
                 .extract().response();
         Assert.assertTrue(response.getStatusLine().contains("HTTP/1.1"));
     }
+
+    @Test
+    public void checkDebugTest(){
+        Specifications.installSpecification(Specifications.requestSpec(), Specifications.responseSpecOK200());
+        GenderData genderData = RestAssured
+                .given()
+                .queryParam(QueryParameters.keyName, QueryParameters.valueLatinName)
+                .when()
+                .get()
+                .then()
+                .extract().as(GenderData.class);
+        Assert.assertTrue(genderData.isMale());
+
+    }
+
+
 }
