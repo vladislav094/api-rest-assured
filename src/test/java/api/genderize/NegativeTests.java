@@ -40,6 +40,7 @@ public class NegativeTests extends Specifications {
                 .extract().response();
         Assert.assertTrue(response.getStatusLine().contains(ResponseValues.code422Description));
     }
+
     @Test
     void checkMissingValueInParameter(){
         Specifications.installSpecification(Specifications.requestSpec(), Specifications.responseSpecOK200());
@@ -54,6 +55,7 @@ public class NegativeTests extends Specifications {
         Assert.assertEquals(genderData.getName().length(), 0);
         Assert.assertEquals((float) genderData.getProbability(), 0);
     }
+
     @Test
     void checkSwapKeyValue(){
         Specifications.installSpecification(Specifications.requestSpec(), Specifications.responseSpecUNIQUE(422));
@@ -66,6 +68,5 @@ public class NegativeTests extends Specifications {
                 .extract().as(MissingParameter.class);
         Assert.assertEquals(missingParameter.getError(), ResponseValues.textErrorMissingNameParameter);
     }
-
 
 }
