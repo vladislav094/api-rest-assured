@@ -68,5 +68,4 @@ public class NegativeTests extends Specifications {
                 .extract().as(MissingParameter.class);
         Assert.assertEquals(missingParameter.getError(), ResponseValues.textErrorMissingNameParameter);
     }
-
 }

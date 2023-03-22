@@ -88,7 +88,6 @@ public class PositiveTests extends Specifications {
         Assert.assertEquals(response.getHeader("Content-Type"), "application/json; charset=utf-8");
         Assert.assertTrue(Integer.parseInt(response.getHeader("x-rate-limit-remaining").trim()) > 0);
         Assert.assertEquals(responseBodyLength.length(), Integer.parseInt(response.getHeader("Content-Length").trim()));
-
     }
 
     @Test
@@ -135,8 +134,6 @@ public class PositiveTests extends Specifications {
                 .then()
                 .extract().as(GenderData.class);
         Assert.assertTrue(genderData.isMale());
-
     }
-
 
 }
