@@ -92,6 +92,7 @@ public class PositiveTests extends Specifications {
         Assert.assertEquals(responseBodyLength.length(), Integer.parseInt(response.getHeader("Content-Length").trim()));
 
     }
+
     @Test
     public void checkServerAndClientDataCorresponding(){
         /*
@@ -106,10 +107,22 @@ public class PositiveTests extends Specifications {
                 .get()
                 .then()
                 .extract().response();
-        String dateHeader = response.getHeader("Date");
-        Date date = new Date();
+        String serverHeaderDate = response.getHeader("Date");
+        Date clientDate = new Date();
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("E, dd MMM yyyy", Locale.ENGLISH);
-        Assert.assertTrue(dateHeader.contains(simpleDateFormat.format(date)));
+        Assert.assertTrue(serverHeaderDate.contains(simpleDateFormat.format(clientDate)));
     }
 
+    @Test
+    public void checkProtocolVersion(){
+        Specifications.installSpecification(Specifications.requestSpec(), Specifications.responseSpecOK200());
+        Response response = RestAssured
+                .given()
+                .queryParam(QueryParameters.keyName, QueryParameters.valueLatinName)
+                .when()
+                .get()
+                .then()
+                .extract().response();
+        Assert.assertTrue(response.getStatusLine().contains("HTTP/1.1"));
+    }
 }
