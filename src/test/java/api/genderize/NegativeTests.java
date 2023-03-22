@@ -1,8 +1,6 @@
 package api.genderize;
 
-import api.genderize.genders.MissingParameter;
-import api.genderize.genders.QueryParameters;
-import api.genderize.genders.ResponseValues;
+import api.genderize.genders.*;
 import api.genderize.specification.Specifications;
 import io.restassured.RestAssured;
 import io.restassured.http.Header;
@@ -40,10 +38,22 @@ public class NegativeTests extends Specifications {
                 .get()
                 .then()
                 .extract().response();
-        System.out.println(response.getStatusLine());
         Assert.assertTrue(response.getStatusLine().contains(ResponseValues.code422Description));
     }
-
+    @Test
+    void checkMissingValueInParameter(){
+        Specifications.installSpecification(Specifications.requestSpec(), Specifications.responseSpecOK200());
+        GenderData genderData = RestAssured
+                .given()
+                .queryParam(QueryParameters.keyName)
+                .get()
+                .then()
+                .extract().as(GenderData.class);
+        Assert.assertEquals((int) genderData.getCount(), 0);
+        Assert.assertNull(genderData.getGender());
+        Assert.assertEquals(genderData.getName().length(), 0);
+        Assert.assertEquals((float) genderData.getProbability(), 0);
+    }
     @Test
     void checkSwapKeyValue(){
         Specifications.installSpecification(Specifications.requestSpec(), Specifications.responseSpecUNIQUE(422));
