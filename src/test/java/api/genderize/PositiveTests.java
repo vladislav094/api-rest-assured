@@ -5,9 +5,17 @@ import api.genderize.genders.QueryParameters;
 import api.genderize.genders.ResponseValues;
 import api.genderize.specification.Specifications;
 import io.restassured.RestAssured;
+import io.restassured.http.Header;
+import io.restassured.http.Headers;
 import io.restassured.response.Response;
 import org.testng.Assert;
 import org.testng.annotations.Test;
+
+import java.text.SimpleDateFormat;
+import java.time.Clock;
+import java.util.Arrays;
+import java.util.Date;
+import java.util.List;
 
 public class PositiveTests extends Specifications {
 
@@ -28,7 +36,7 @@ public class PositiveTests extends Specifications {
                 .when()
                 .get()
                 .then()
-                    .extract().as(GenderData.class);
+                .extract().as(GenderData.class);
         Assert.assertNotNull(genderData.getCount());
         Assert.assertEquals(genderData.getGender(), ResponseValues.valueGenderMale);
         Assert.assertEquals(genderData.getName(), QueryParameters.valueLatinName);
@@ -52,7 +60,7 @@ public class PositiveTests extends Specifications {
     }
 
     @Test
-    public void checkValueCorrespondExpectedData(){
+    public void checkValueCorrespondExpectedDataForVladislavName(){
         Specifications.installSpecification(Specifications.requestSpec(), responseSpecOK200());
         GenderData genderData = RestAssured
                 .given()
@@ -82,6 +90,27 @@ public class PositiveTests extends Specifications {
         Assert.assertTrue(Integer.parseInt(response.getHeader("x-rate-limit-remaining").trim()) > 0);
         Assert.assertEquals(responseBodyLength.length(), Integer.parseInt(response.getHeader("Content-Length").trim()));
 
+    }
+    @Test
+    public void checkServerAndClientDataCorresponding(){
+        Specifications.installSpecification(Specifications.requestSpec(), Specifications.responseSpecOK200());
+        Response response = RestAssured
+                .given()
+                .queryParam(QueryParameters.keyName, QueryParameters.valueLatinName)
+                .when()
+                .get()
+                .then()
+                .extract().response();
+        String regex = "[^0-9]";
+//        String charToReplace = "ABCDEFGHIJKLMNOPQRSTUVWXYZ,:GMT";
+        String currentTime = Clock.systemUTC().instant().toString();
+        String dateHeader = response.getHeader("Date");
+        Date date = new Date();
+//        System.out.println(currentTime);
+//        System.out.println(Arrays.toString(currentTime.split(regex)));
+//        System.out.println(response.getHeader("Date"));
+        System.out.println(dateHeader);
+        System.out.println(date.toString());
     }
 
 }
