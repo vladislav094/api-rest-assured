@@ -16,6 +16,7 @@ import java.time.Clock;
 import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 
 public class PositiveTests extends Specifications {
 
@@ -93,6 +94,10 @@ public class PositiveTests extends Specifications {
     }
     @Test
     public void checkServerAndClientDataCorresponding(){
+        /*
+         This test method will be modified in the future and
+         regular expressions will be used to process the current date.
+         */
         Specifications.installSpecification(Specifications.requestSpec(), Specifications.responseSpecOK200());
         Response response = RestAssured
                 .given()
@@ -101,16 +106,10 @@ public class PositiveTests extends Specifications {
                 .get()
                 .then()
                 .extract().response();
-        String regex = "[^0-9]";
-//        String charToReplace = "ABCDEFGHIJKLMNOPQRSTUVWXYZ,:GMT";
-        String currentTime = Clock.systemUTC().instant().toString();
         String dateHeader = response.getHeader("Date");
         Date date = new Date();
-//        System.out.println(currentTime);
-//        System.out.println(Arrays.toString(currentTime.split(regex)));
-//        System.out.println(response.getHeader("Date"));
-        System.out.println(dateHeader);
-        System.out.println(date.toString());
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("E, dd MMM yyyy", Locale.ENGLISH);
+        Assert.assertTrue(dateHeader.contains(simpleDateFormat.format(date)));
     }
 
 }
