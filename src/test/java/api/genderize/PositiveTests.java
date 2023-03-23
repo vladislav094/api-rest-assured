@@ -13,10 +13,7 @@ import org.testng.Assert;
 import org.testng.annotations.Test;
 
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
-import java.util.Locale;
+import java.util.*;
 
 public class PositiveTests extends Specifications {
 
@@ -86,10 +83,10 @@ public class PositiveTests extends Specifications {
                 .get()
                 .then()
                 .extract().response();
-        String responseBodyLength = response.getBody().asString();
+        String responseBody = response.getBody().asString();
         Assert.assertEquals(response.getHeader("Content-Type"), "application/json; charset=utf-8");
         Assert.assertTrue(Integer.parseInt(response.getHeader("x-rate-limit-remaining").trim()) > 0);
-        Assert.assertEquals(responseBodyLength.length(), Integer.parseInt(response.getHeader("Content-Length").trim()));
+        Assert.assertEquals(responseBody.length(), Integer.parseInt(response.getHeader("Content-Length").trim()));
     }
 
     @Test
@@ -126,7 +123,7 @@ public class PositiveTests extends Specifications {
     }
 
     @Test
-    public void checkDebugTest(){
+    public void checkAllHeadersForRateLimiting(){
         Specifications.installSpecification(Specifications.requestSpec(), Specifications.responseSpecOK200());
         Response response = RestAssured
                 .given()
@@ -137,26 +134,10 @@ public class PositiveTests extends Specifications {
                 .extract().response();
         Headers allHeaders = response.getHeaders();
         List<String> headersName = new ArrayList<>();
-        List<String> myHeaders = new ArrayList<>();
-        Boolean flag = false;
-        myHeaders.add("x-rate-limit-limit");
-        myHeaders.add("x-rate-limit-1remaining");
-        myHeaders.add("x-rate-limit-reset");
         for(Header header: allHeaders){
             headersName.add(header.getName());
         }
-        System.out.println(headersName);
-        System.out.println(myHeaders);
-        for(String head : myHeaders){
-            if(headersName.contains(head)){
-                flag = true;
-            }
-            else {
-                flag = false;
-                break;
-            }
-        }
-        System.out.println(flag);
+        Assert.assertTrue(ResponseValues.allExpectedRateLimitHeaders(headersName));
     }
 
 }

@@ -61,31 +61,31 @@ public class GenderData implements Serializable{
     }
 
     public boolean isVladislavName(String alphabet){
-        if (alphabet.equals("latin")){
+        if (alphabet.equals(HelperData.latinName)){
             return QueryParameters.valueLatinName.equals(this.getName());
         }
 
-        if (alphabet.equals("cyrillic")){
+        if (alphabet.equals(HelperData.cyrillicName)){
             return QueryParameters.valueCyrillicName.equals(this.getName());
         }
         else {return false;}
     }
 
     public boolean isProbabilityForVladislav(String alphabet){
-        if (alphabet.equals("latin")) {
+        if (alphabet.equals(HelperData.latinName)) {
             return ResponseValues.valueProbabilityForVladislav.equals(this.getProbability());
         }
-        if (alphabet.equals("cyrillic")){
+        if (alphabet.equals(HelperData.cyrillicName)){
             return ResponseValues.valueProbabilityForCyrillicVladislav.equals(this.getProbability());
         }
         else {return false;}
     }
 
     public boolean isCountForVladislav(String alphabet){
-        if (alphabet.equals("latin")) {
+        if (alphabet.equals(HelperData.latinName)) {
             return ResponseValues.valueCountForVladislav.equals(this.getCount());
         }
-        if (alphabet.equals("cyrillic")){
+        if (alphabet.equals(HelperData.cyrillicName)){
             return ResponseValues.valueCountForCyrillicVladislav.equals(this.getCount());
         }
         else {return false;}
