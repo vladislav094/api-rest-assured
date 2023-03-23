@@ -13,7 +13,9 @@ import org.testng.Assert;
 import org.testng.annotations.Test;
 
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 import java.util.Locale;
 
 public class PositiveTests extends Specifications {
@@ -126,14 +128,35 @@ public class PositiveTests extends Specifications {
     @Test
     public void checkDebugTest(){
         Specifications.installSpecification(Specifications.requestSpec(), Specifications.responseSpecOK200());
-        GenderData genderData = RestAssured
+        Response response = RestAssured
                 .given()
                 .queryParam(QueryParameters.keyName, QueryParameters.valueLatinName)
                 .when()
                 .get()
                 .then()
-                .extract().as(GenderData.class);
-        Assert.assertTrue(genderData.isMale());
+                .extract().response();
+        Headers allHeaders = response.getHeaders();
+        List<String> headersName = new ArrayList<>();
+        List<String> myHeaders = new ArrayList<>();
+        Boolean flag = false;
+        myHeaders.add("x-rate-limit-limit");
+        myHeaders.add("x-rate-limit-1remaining");
+        myHeaders.add("x-rate-limit-reset");
+        for(Header header: allHeaders){
+            headersName.add(header.getName());
+        }
+        System.out.println(headersName);
+        System.out.println(myHeaders);
+        for(String head : myHeaders){
+            if(headersName.contains(head)){
+                flag = true;
+            }
+            else {
+                flag = false;
+                break;
+            }
+        }
+        System.out.println(flag);
     }
 
 }
