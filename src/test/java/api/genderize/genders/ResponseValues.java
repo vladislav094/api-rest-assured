@@ -23,13 +23,4 @@ public class ResponseValues {
             "x-rate-limit-remaining",
             "x-rate-limit-reset");
 
-
-
-    public static void allHeaders(Headers myHeaders){
-        List<String> headersName = new ArrayList<>();
-        for(Header header: myHeaders){
-            headersName.add(header.getName());
-        }
-//        return myHeaders;
-    }
 }
