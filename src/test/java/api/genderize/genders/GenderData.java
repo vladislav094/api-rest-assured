@@ -1,4 +1,6 @@
 package api.genderize.genders;
+import api.genderize.helpers.HelperData;
+
 import java.io.Serializable;
 
 public class GenderData implements Serializable{

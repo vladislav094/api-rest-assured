@@ -1,9 +1,10 @@
 package api.genderize;
 
 import api.genderize.genders.GenderData;
-import api.genderize.genders.HelperData;
+import api.genderize.helpers.HelperData;
 import api.genderize.genders.QueryParameters;
 import api.genderize.genders.ResponseValues;
+import api.genderize.helpers.HelperMethods;
 import api.genderize.specification.Specifications;
 import io.restassured.RestAssured;
 import io.restassured.http.Header;
@@ -137,7 +138,7 @@ public class PositiveTests extends Specifications {
         for(Header header: allHeaders){
             headersName.add(header.getName());
         }
-        Assert.assertTrue(ResponseValues.allExpectedRateLimitHeaders(headersName));
+        Assert.assertTrue(HelperMethods.allExpectedRateLimitHeaders(headersName));
     }
 
 }

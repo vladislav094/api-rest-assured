@@ -23,25 +23,13 @@ public class ResponseValues {
             "x-rate-limit-remaining",
             "x-rate-limit-reset");
 
-    public static boolean allExpectedRateLimitHeaders(List<String> myObj){
-        boolean flag = false;
-        for(String head : ExpectedXRateLimitHeaders){
-            if (myObj.contains(head)){
-                flag = true;
-            }
-            else {
-                flag = false;
-                break;
-            }
-        }
-        return flag;
-    }
+
 
     public static void allHeaders(Headers myHeaders){
         List<String> headersName = new ArrayList<>();
         for(Header header: myHeaders){
             headersName.add(header.getName());
         }
-        return myHeaders;
+//        return myHeaders;
     }
 }
