@@ -123,6 +123,7 @@ public class PositiveTests extends Specifications {
         Assert.assertTrue(response.getStatusLine().contains("HTTP/1.1"));
     }
 
+//    @Test(threadPoolSize = 10, invocationCount = 200)
     @Test
     public void checkAllHeadersForRateLimiting(){
         Specifications.installSpecification(Specifications.requestSpec(), Specifications.responseSpecOK200());
@@ -134,7 +135,8 @@ public class PositiveTests extends Specifications {
                 .then()
                 .extract().response();
         Headers allHeaders = response.getHeaders();
-        List<String> headersName = HelperMethods.getListAllHeaders(allHeaders);
+        List <String> headersName = HelperMethods.getListAllHeaders(allHeaders);
+        Assert.assertTrue(HelperMethods.allExpectedRateLimitHeaders(headersName));
         System.out.println(headersName);
     }
 
