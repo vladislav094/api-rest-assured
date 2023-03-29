@@ -11,7 +11,7 @@ public class HelperMethods {
 
     public static boolean allExpectedRateLimitHeaders(List<String> myObj){
         boolean flag = false;
-        for(String head : ResponseValues.ExpectedXRateLimitHeaders){
+        for(String head : ResponseValues.expectedXRateLimitHeaders){
             if (myObj.contains(head)){
                 flag = true;
             }

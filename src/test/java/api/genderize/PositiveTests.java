@@ -13,6 +13,7 @@ import io.restassured.response.Response;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
+import javax.swing.text.html.parser.Entity;
 import java.text.SimpleDateFormat;
 import java.util.*;
 
@@ -140,4 +141,16 @@ public class PositiveTests extends Specifications {
         System.out.println(headersName);
     }
 
+    @Test
+    public void check10NameWereTransferredInParameters(){
+        Specifications.installSpecification(Specifications.requestSpec(), Specifications.responseSpecOK200());
+        GenderData[] genderData = RestAssured
+                .given()
+                .queryParams(QueryParameters.listKeyName, QueryParameters.listValueWith10LatinNames)
+                .when()
+                .get()
+                .then()
+                .extract().as(GenderData[].class);
+        Assert.assertEquals(Arrays.stream(genderData).count(), 10);
+    }
 }

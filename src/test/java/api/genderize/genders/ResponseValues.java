@@ -19,7 +19,8 @@ public class ResponseValues {
     public final static String code429Description = "Request limit reached";
     public final static String code401Description = "Invalid API key";
     public final static String textErrorMissingNameParameter = "Missing 'name' parameter";
-    public final static List<String> ExpectedXRateLimitHeaders = Arrays.asList("x-rate-limit-limit",
+    public final static String textInvalidNameParameter = "Invalid 'name' parameter";
+    public final static List<String> expectedXRateLimitHeaders = Arrays.asList("x-rate-limit-limit",
             "x-rate-limit-remaining",
             "x-rate-limit-reset");
 

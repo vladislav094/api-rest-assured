@@ -9,6 +9,10 @@ import io.restassured.response.Response;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
 public class NegativeTests extends Specifications {
 
     /*
@@ -67,5 +71,21 @@ public class NegativeTests extends Specifications {
                 .then()
                 .extract().as(MissingParameter.class);
         Assert.assertEquals(missingParameter.getError(), ResponseValues.textErrorMissingNameParameter);
+    }
+
+    @Test
+    public void checkThatMore10namesCannotPassed(){
+        Specifications.installSpecification(Specifications.requestSpec(), Specifications.responseSpecUNIQUE(422));
+        List<String> listValueWith11Name = new ArrayList<>();
+        listValueWith11Name.addAll(QueryParameters.listValueWith10LatinNames);
+        listValueWith11Name.add("Random");
+        MissingParameter missingParameter = RestAssured
+                .given()
+                .queryParams(QueryParameters.listKeyName, listValueWith11Name)
+                .when()
+                .get()
+                .then()
+                .extract().as(MissingParameter.class);
+        Assert.assertEquals(missingParameter.getError(), ResponseValues.textInvalidNameParameter);
     }
 }
