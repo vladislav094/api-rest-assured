@@ -74,7 +74,7 @@ public class NegativeTests extends Specifications {
     }
 
     @Test
-    public void checkThatMore10namesCannotPassed(){
+    public void checkThatMore10NamesCannotPassed(){
         Specifications.installSpecification(Specifications.requestSpec(), Specifications.responseSpecUNIQUE(422));
         List<String> listValueWith11Name = new ArrayList<>(QueryParameters.listValueWith10MaleNames);
         listValueWith11Name.add("Random");
@@ -102,6 +102,20 @@ public class NegativeTests extends Specifications {
         Assert.assertNull(genderData.getGender());
         Assert.assertTrue(genderData.getName().contains(" "));
         Assert.assertEquals(genderData.getProbability().intValue(), 0);
+    }
+
+    @Test
+    public void checkExecutePOSTMethodInsteadOfGET(){
+        Specifications.installSpecification(Specifications.requestSpec(), Specifications.responseSpecUNIQUE(404));
+        Response response = RestAssured
+                .given()
+                .queryParam(QueryParameters.keyName, QueryParameters.valueLatinName)
+                .when()
+                .post()
+                .then()
+                .extract().response();
+        Assert.assertTrue(response.getStatusLine().contains(ResponseValues.code404Description));
+        Assert.assertTrue(response.getBody().asString().contains(ResponseValues.textNotFound));
     }
 
 }

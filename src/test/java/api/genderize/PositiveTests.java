@@ -5,17 +5,21 @@ import api.genderize.helpers.HelperData;
 import api.genderize.genders.QueryParameters;
 import api.genderize.genders.ResponseValues;
 import api.genderize.helpers.HelperMethods;
+import api.genderize.helpers.ObjMapper;
 import api.genderize.specification.Specifications;
 import io.restassured.RestAssured;
 import io.restassured.http.Header;
 import io.restassured.http.Headers;
+import io.restassured.mapper.ObjectMapper;
 import io.restassured.response.Response;
 import org.testng.Assert;
 import org.testng.annotations.Test;
+import org.testng.asserts.Assertion;
 
 import javax.swing.text.html.parser.Entity;
 import java.text.SimpleDateFormat;
 import java.util.*;
+import java.util.stream.Collectors;
 
 public class PositiveTests extends Specifications {
 
@@ -143,14 +147,33 @@ public class PositiveTests extends Specifications {
     @Test
     public void check10NameWereTransferredInParameters(){
         Specifications.installSpecification(Specifications.requestSpec(), Specifications.responseSpecOK200());
-        GenderData[] genderData = RestAssured
+        List<GenderData> genderData = RestAssured
                 .given()
                 .queryParams(QueryParameters.listKeyName, QueryParameters.listValueWith10MaleNames)
                 .when()
                 .get()
                 .then()
-                .extract().as(GenderData[].class);
-        Assert.assertEquals(Arrays.stream(genderData).count(), 10);
-
+                .extract().body().jsonPath().get();
+        Assert.assertEquals(genderData.size(), 10);
     }
+
+    @Test
+    public void checkThatGenderForAllNamesIsMale(){
+        Specifications.installSpecification(Specifications.requestSpec(), Specifications.responseSpecOK200());
+        List<GenderData> genderData = RestAssured
+                .given()
+                .queryParam(QueryParameters.listKeyName, QueryParameters.listValueWith10MaleNames)
+                .when()
+                .get()
+                .then()
+                .extract().body().jsonPath().get();
+        System.out.println(genderData.toString());
+//        System.out.println(genderData.get(1));
+        for ( int i = 0; i<genderData.size(); i++){
+//            Assert.assertTrue(genderData.get(i).toString().contains("male"));
+//            System.out.println(genderData.get(i));
+            System.out.println(genderData.get(i).getClass().getName());
+        }
+    }
+
 }

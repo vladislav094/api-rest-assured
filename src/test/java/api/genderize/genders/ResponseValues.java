@@ -18,6 +18,8 @@ public class ResponseValues {
     public final static String code422Description = "Unprocessable Entity";
     public final static String code429Description = "Request limit reached";
     public final static String code401Description = "Invalid API key";
+    public final static String code404Description = "Not Found";
+    public final static String textNotFound = "Not Found";
     public final static String textErrorMissingNameParameter = "Missing 'name' parameter";
     public final static String textInvalidNameParameter = "Invalid 'name' parameter";
     public final static List<String> expectedXRateLimitHeaders = Arrays.asList("x-rate-limit-limit",
