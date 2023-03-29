@@ -5,5 +5,5 @@
 - REST Assured
 ### Running test classes via the command line 
 ```
-mvn -Dtest=PositiveTests, NegativeTests*le test
+mvn -Dtest=PositiveTests,NegativeTests* test
 ```

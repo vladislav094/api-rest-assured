@@ -138,7 +138,6 @@ public class PositiveTests extends Specifications {
         Headers allHeaders = response.getHeaders();
         List <String> headersName = HelperMethods.getListAllHeaders(allHeaders);
         Assert.assertTrue(HelperMethods.allExpectedRateLimitHeaders(headersName));
-        System.out.println(headersName);
     }
 
     @Test
@@ -152,7 +151,6 @@ public class PositiveTests extends Specifications {
                 .then()
                 .extract().as(GenderData[].class);
         Assert.assertEquals(Arrays.stream(genderData).count(), 10);
-        System.out.println(genderData);
 
     }
 }
