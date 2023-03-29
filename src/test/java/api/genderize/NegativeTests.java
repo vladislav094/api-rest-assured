@@ -65,7 +65,7 @@ public class NegativeTests extends Specifications {
         Specifications.installSpecification(Specifications.requestSpec(), Specifications.responseSpecUNIQUE(422));
         MissingParameter missingParameter = RestAssured
                 .given()
-                .queryParam("vladislav", "name")
+                .queryParam(QueryParameters.valueLatinName, QueryParameters.keyName)
                 .when()
                 .get()
                 .then()
@@ -76,8 +76,7 @@ public class NegativeTests extends Specifications {
     @Test
     public void checkThatMore10namesCannotPassed(){
         Specifications.installSpecification(Specifications.requestSpec(), Specifications.responseSpecUNIQUE(422));
-        List<String> listValueWith11Name = new ArrayList<>();
-        listValueWith11Name.addAll(QueryParameters.listValueWith10LatinNames);
+        List<String> listValueWith11Name = new ArrayList<>(QueryParameters.listValueWith10MaleNames);
         listValueWith11Name.add("Random");
         MissingParameter missingParameter = RestAssured
                 .given()
@@ -88,4 +87,21 @@ public class NegativeTests extends Specifications {
                 .extract().as(MissingParameter.class);
         Assert.assertEquals(missingParameter.getError(), ResponseValues.textInvalidNameParameter);
     }
+
+    @Test
+    public void checkResultWithSpaceBetweenLettersInParameter(){
+        Specifications.installSpecification(Specifications.requestSpec(), Specifications.responseSpecOK200());
+        GenderData genderData = RestAssured
+                .given()
+                .queryParam(QueryParameters.keyName, "Spa ce")
+                .when()
+                .get()
+                .then()
+                .extract().as(GenderData.class);
+        Assert.assertEquals(genderData.getCount().intValue(), 0);
+        Assert.assertNull(genderData.getGender());
+        Assert.assertTrue(genderData.getName().contains(" "));
+        Assert.assertEquals(genderData.getProbability().intValue(), 0);
+    }
+
 }

@@ -146,11 +146,13 @@ public class PositiveTests extends Specifications {
         Specifications.installSpecification(Specifications.requestSpec(), Specifications.responseSpecOK200());
         GenderData[] genderData = RestAssured
                 .given()
-                .queryParams(QueryParameters.listKeyName, QueryParameters.listValueWith10LatinNames)
+                .queryParams(QueryParameters.listKeyName, QueryParameters.listValueWith10MaleNames)
                 .when()
                 .get()
                 .then()
                 .extract().as(GenderData[].class);
         Assert.assertEquals(Arrays.stream(genderData).count(), 10);
+        System.out.println(genderData);
+
     }
 }

@@ -9,6 +9,6 @@ public class QueryParameters {
     public final static String valueCyrillicName = "владислав";
     public final static String valueLatinNameCapitalLetter = "Vladislav";
     public final static String listKeyName = "name[]";
-    public final static List<String> listValueWith10LatinNames = Arrays.asList(valueLatinName, valueLatinNameCapitalLetter,
-            "Joan", "Harry", "Steve", "Bob", "Michale", "Ted", "Martin", "Greg");
+    public final static List<String> listValueWith10MaleNames = Arrays.asList("Albert", "Frank",
+            "John", "Harry", "Steve", "Bob", "Michale", "Ted", "Martin", "Greg");
 }
