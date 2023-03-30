@@ -56,10 +56,10 @@ public class GenderData implements Serializable{
     }
 
     public boolean isMale(){
-        return "male".equals(this.getGender());
+        return ResponseValues.valueGenderMale.equals(this.getGender());
     }
     public boolean isFemale(){
-        return "female".equals(this.getGender());
+        return ResponseValues.valueGenderFemale.equals(this.getGender());
     }
 
     public boolean isVladislavName(String alphabet){

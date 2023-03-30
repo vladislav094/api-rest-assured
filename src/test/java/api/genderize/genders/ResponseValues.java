@@ -8,6 +8,9 @@ import java.util.Arrays;
 import java.util.List;
 
 public class ResponseValues {
+    /*
+    Expected data from response (body/headers)
+     */
     public final static String valueGenderMale = "male";
     public final static String valueGenderFemale = "female";
     public final static Integer valueCountForVladislav = 18721;

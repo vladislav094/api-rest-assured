@@ -4,6 +4,9 @@ import java.util.Arrays;
 import java.util.List;
 
 public class QueryParameters {
+    /*
+    Data for query parameters
+     */
     public final static String keyName = "name";
     public final static String valueLatinName ="vladislav";
     public final static String valueCyrillicName = "владислав";
