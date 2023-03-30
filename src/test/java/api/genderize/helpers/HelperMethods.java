@@ -10,6 +10,9 @@ import java.util.List;
 public class HelperMethods {
 
     public static boolean allExpectedRateLimitHeaders(List<String> myObj){
+        /*
+        ResponseValues.expectedXRateLimitHeaders - list with all expected headers
+         */
         boolean flag = false;
         for(String head : ResponseValues.expectedXRateLimitHeaders){
             if (myObj.contains(head)){

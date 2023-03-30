@@ -33,6 +33,12 @@ public class PositiveTests extends Specifications {
 
     @Test
     public void checkSuccessResultWithParameter(){
+        /*
+        Checking the response body for valid data. We check that the data is coming, the values correspond to the expected
+        QueryParameters.keyName = "name"
+        QueryParameters.valueLatinName = "vladislav"
+        HelperData.latinName = "latin"
+         */
         Specifications.installSpecification(Specifications.requestSpec(), Specifications.responseSpecOK200());
         GenderData genderData = RestAssured
                 .given()
@@ -49,6 +55,12 @@ public class PositiveTests extends Specifications {
 
     @Test
     public void checkResultWithCyrillicName(){
+        /*
+        We check the results in the response body when determining gender by name in Cyrillic characters.
+        QueryParameters.keyName = "name"
+        QueryParameters.valueCyrillicName = "владислав"
+        HelperData.cyrillicName = "cyrillic"
+         */
         Specifications.installSpecification(Specifications.requestSpec(), Specifications.responseSpecOK200());
         GenderData genderData = RestAssured
                 .given()
@@ -65,6 +77,12 @@ public class PositiveTests extends Specifications {
 
     @Test
     public void checkValueCorrespondExpectedDataForVladislavName(){
+        /*
+        Checking the data in the response body for a static name "vladislav".
+        QueryParameters.keyName = "name"
+        QueryParameters.valueLatinName = "vladislav"
+        HelperData.latinName = "latin"
+         */
         Specifications.installSpecification(Specifications.requestSpec(), responseSpecOK200());
         GenderData genderData = RestAssured
                 .given()
@@ -82,6 +100,9 @@ public class PositiveTests extends Specifications {
     @Test
     public void checkResponseHeaders(){
         Specifications.installSpecification(requestSpec(), responseSpecOK200());
+        /*
+        We check that the response headers correspond to the expected results.
+         */
         Response response = RestAssured
                 .given()
                 .queryParam(QueryParameters.keyName, QueryParameters.valueLatinName)
@@ -98,6 +119,7 @@ public class PositiveTests extends Specifications {
     @Test
     public void checkServerAndClientDataCorresponding(){
         /*
+         We check that the date in the response headers corresponds to the current date on the user's computer.
          This test method will be modified in the future and
          regular expressions will be used to process the current date.
          */
@@ -117,6 +139,9 @@ public class PositiveTests extends Specifications {
 
     @Test
     public void checkProtocolVersion(){
+        /*
+        We check that the protocol used and its version correspond to the expected
+         */
         Specifications.installSpecification(Specifications.requestSpec(), Specifications.responseSpecOK200());
         Response response = RestAssured
                 .given()
@@ -131,6 +156,10 @@ public class PositiveTests extends Specifications {
 //    @Test(threadPoolSize = 10, invocationCount = 200)
     @Test
     public void checkAllHeadersForRateLimiting(){
+        /*
+        We check that the response contains headers that are responsible for the speed limit and the allowed number of requests.
+        HelperMethods.allExpectedRateLimitHeaders -a method that accepts a list of headers from the response as input and checks for a Rate-Limiting-Headers.
+         */
         Specifications.installSpecification(Specifications.requestSpec(), Specifications.responseSpecOK200());
         Response response = RestAssured
                 .given()
@@ -146,6 +175,10 @@ public class PositiveTests extends Specifications {
 
     @Test
     public void check10NameWereTransferredInParameters(){
+        /*
+        We check that the number of objects in the response body corresponds to the specified number of parameters in the request.
+        QueryParameters.listValueWith10MaleNames - list with 10 male names.
+         */
         Specifications.installSpecification(Specifications.requestSpec(), Specifications.responseSpecOK200());
         List<GenderData> genderData = RestAssured
                 .given()
@@ -159,6 +192,9 @@ public class PositiveTests extends Specifications {
 
     @Test
     public void checkThatGenderForAllNamesIsMale(){
+        /*
+        We check that all objects in the response have a gender corresponding to the passed name in the parameter. In this case, the male sex is expected.
+         */
         Specifications.installSpecification(Specifications.requestSpec(), Specifications.responseSpecOK200());
         List<GenderData> genderData = Arrays.asList(RestAssured
                 .given()

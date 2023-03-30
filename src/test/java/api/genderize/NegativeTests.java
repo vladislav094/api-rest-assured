@@ -26,6 +26,10 @@ public class NegativeTests extends Specifications {
 
     @Test
     void checkErrorTextWithMissingParameters(){
+        /*
+        We check the error text in the response body for a request without parametersю
+        ResponseValues.textErrorMissingNameParameter = "Missing 'name' parameter"
+         */
         Specifications.installSpecification(Specifications.requestSpec(), Specifications.responseSpecUNIQUE(422));
         MissingParameter missingParameter = RestAssured
                 .get()
@@ -36,6 +40,10 @@ public class NegativeTests extends Specifications {
 
     @Test
     void checkStatusLineWithMissingParameters(){
+        /*
+        Checking the description of the response error code for a request without parameters. In this case, a description is expected for code 422.
+        ResponseValues.code422Description = "Unprocessable Entity"
+         */
         Specifications.installSpecification(Specifications.requestSpec(), Specifications.responseSpecUNIQUE(422));
         Response response = RestAssured
                 .given()
@@ -47,6 +55,9 @@ public class NegativeTests extends Specifications {
 
     @Test
     void checkMissingValueInParameter(){
+        /*
+        We check the structure of the object in the response body for the request without specifying a value.
+         */
         Specifications.installSpecification(Specifications.requestSpec(), Specifications.responseSpecOK200());
         GenderData genderData = RestAssured
                 .given()
@@ -62,6 +73,10 @@ public class NegativeTests extends Specifications {
 
     @Test
     void checkSwapKeyValue(){
+        /*
+        We check the error text in the message body for the request in which the key and value are rearranged.
+        ResponseValues.textErrorMissingNameParameter = "Missing 'name' parameter"
+         */
         Specifications.installSpecification(Specifications.requestSpec(), Specifications.responseSpecUNIQUE(422));
         MissingParameter missingParameter = RestAssured
                 .given()
@@ -75,6 +90,11 @@ public class NegativeTests extends Specifications {
 
     @Test
     public void checkThatMore10NamesCannotPassed(){
+        /*
+        We check the error text in the message body when trying to pass more than 10 parameters in the request.
+        QueryParameters.listValueWith10MaleNames - list with 10 male names.
+        ResponseValues.textInvalidNameParameter - "Invalid 'name' parameter"
+         */
         Specifications.installSpecification(Specifications.requestSpec(), Specifications.responseSpecUNIQUE(422));
         List<String> listValueWith11Name = new ArrayList<>(QueryParameters.listValueWith10MaleNames);
         listValueWith11Name.add("Random");
@@ -90,6 +110,9 @@ public class NegativeTests extends Specifications {
 
     @Test
     public void checkResultWithSpaceBetweenLettersInParameter(){
+        /*
+        We check the structure of the response body when trying to pass a value with a space between characters.
+         */
         Specifications.installSpecification(Specifications.requestSpec(), Specifications.responseSpecOK200());
         GenderData genderData = RestAssured
                 .given()
@@ -106,6 +129,11 @@ public class NegativeTests extends Specifications {
 
     @Test
     public void checkExecutePOSTMethodInsteadOfGET(){
+        /*
+        Checking an attempt to execute an unsupported POST method for this router.
+        ResponseValues.code404Description = "Not Found"
+        ResponseValues.textNotFound = "Not Found"
+         */
         Specifications.installSpecification(Specifications.requestSpec(), Specifications.responseSpecUNIQUE(404));
         Response response = RestAssured
                 .given()
