@@ -28,17 +28,17 @@ public class Specifications {
                 .expectStatusCode(200)
                 .build();
     }
-    public static ResponseSpecification responseSpecERROR400(){
+    public static ResponseSpecification responseSpecBadRequest400(){
         return new ResponseSpecBuilder()
                 .expectStatusCode(400)
                 .build();
     }
-    public static ResponseSpecification responseSpecREDIRECT301(){
+    public static ResponseSpecification responseSpecRedirect301(){
         return new ResponseSpecBuilder()
                 .expectStatusCode(301)
                 .build();
     }
-    public static ResponseSpecification responseSpecUNIQUE(int statusCode){
+    public static ResponseSpecification responseSpecUnique(int statusCode){
         return new ResponseSpecBuilder()
                 .expectStatusCode(statusCode)
                 .build();

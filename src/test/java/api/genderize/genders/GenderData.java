@@ -3,25 +3,23 @@ import api.genderize.helpers.HelperData;
 
 import java.io.Serializable;
 
-public class GenderData implements Serializable{
+public class GenderData{
     private Integer count;
     private String gender;
     private String name;
     private Float probability;
 
-    public GenderData(Integer count, String gender, String name, Float probability) {
+    public GenderData(int count, String gender, String name, float probability) {
         this.count = count;
         this.gender = gender;
         this.name = name;
         this.probability = probability;
     }
-
     public GenderData(){
         super();
     }
-
     // All Getters
-    public Integer getCount() {
+    public int getCount() {
         return count;
     }
 
@@ -33,26 +31,8 @@ public class GenderData implements Serializable{
         return name;
     }
 
-    public Float getProbability() {
+    public float getProbability() {
         return probability;
-    }
-
-
-    // All Setters
-    public void setCount(Integer count) {
-        this.count = count;
-    }
-
-    public void setGender(String gender) {
-        this.gender = gender;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public void setProbability(Float probability) {
-        this.probability = probability;
     }
 
     public boolean isMale(){

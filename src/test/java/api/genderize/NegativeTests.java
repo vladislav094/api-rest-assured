@@ -30,7 +30,7 @@ public class NegativeTests extends Specifications {
         We check the error text in the response body for a request without parametersю
         ResponseValues.textErrorMissingNameParameter = "Missing 'name' parameter"
          */
-        Specifications.installSpecification(Specifications.requestSpec(), Specifications.responseSpecUNIQUE(422));
+        Specifications.installSpecification(Specifications.requestSpec(), Specifications.responseSpecUnique(422));
         MissingParameter missingParameter = RestAssured
                 .get()
                 .then()
@@ -44,7 +44,7 @@ public class NegativeTests extends Specifications {
         Checking the description of the response error code for a request without parameters. In this case, a description is expected for code 422.
         ResponseValues.code422Description = "Unprocessable Entity"
          */
-        Specifications.installSpecification(Specifications.requestSpec(), Specifications.responseSpecUNIQUE(422));
+        Specifications.installSpecification(Specifications.requestSpec(), Specifications.responseSpecUnique(422));
         Response response = RestAssured
                 .given()
                 .get()
@@ -77,7 +77,7 @@ public class NegativeTests extends Specifications {
         We check the error text in the message body for the request in which the key and value are rearranged.
         ResponseValues.textErrorMissingNameParameter = "Missing 'name' parameter"
          */
-        Specifications.installSpecification(Specifications.requestSpec(), Specifications.responseSpecUNIQUE(422));
+        Specifications.installSpecification(Specifications.requestSpec(), Specifications.responseSpecUnique(422));
         MissingParameter missingParameter = RestAssured
                 .given()
                 .queryParam(QueryParameters.valueLatinName, QueryParameters.keyName)
@@ -95,7 +95,7 @@ public class NegativeTests extends Specifications {
         QueryParameters.listValueWith10MaleNames - list with 10 male names.
         ResponseValues.textInvalidNameParameter - "Invalid 'name' parameter"
          */
-        Specifications.installSpecification(Specifications.requestSpec(), Specifications.responseSpecUNIQUE(422));
+        Specifications.installSpecification(Specifications.requestSpec(), Specifications.responseSpecUnique(422));
         List<String> listValueWith11Name = new ArrayList<>(QueryParameters.listValueWith10MaleNames);
         listValueWith11Name.add("Random");
         MissingParameter missingParameter = RestAssured
@@ -121,10 +121,10 @@ public class NegativeTests extends Specifications {
                 .get()
                 .then()
                 .extract().as(GenderData.class);
-        Assert.assertEquals(genderData.getCount().intValue(), 0);
+        Assert.assertEquals(genderData.getCount(), 0);
         Assert.assertNull(genderData.getGender());
         Assert.assertTrue(genderData.getName().contains(" "));
-        Assert.assertEquals(genderData.getProbability().intValue(), 0);
+        Assert.assertEquals(genderData.getProbability(), 0);
     }
 
     @Test
@@ -134,7 +134,7 @@ public class NegativeTests extends Specifications {
         ResponseValues.code404Description = "Not Found"
         ResponseValues.textNotFound = "Not Found"
          */
-        Specifications.installSpecification(Specifications.requestSpec(), Specifications.responseSpecUNIQUE(404));
+        Specifications.installSpecification(Specifications.requestSpec(), Specifications.responseSpecUnique(404));
         Response response = RestAssured
                 .given()
                 .queryParam(QueryParameters.keyName, QueryParameters.valueLatinName)
