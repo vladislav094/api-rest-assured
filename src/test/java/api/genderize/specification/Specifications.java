@@ -10,6 +10,8 @@ import io.restassured.specification.RequestSpecification;
 import io.restassured.specification.ResponseSpecification;
 
 import static io.restassured.RestAssured.given;
+import static org.hamcrest.collection.IsMapContaining.hasKey;
+
 public class Specifications {
     private final static String URL = "https://api.genderize.io/";
     public static RequestSpecification requestSpec(){
@@ -26,6 +28,7 @@ public class Specifications {
     public static ResponseSpecification responseSpecOK200(){
         return new ResponseSpecBuilder()
                 .expectStatusCode(200)
+                .expectBody("$", hasKey("count"))
                 .build();
     }
     public static ResponseSpecification responseSpecBadRequest400(){
