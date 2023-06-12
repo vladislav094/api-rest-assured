@@ -16,10 +16,14 @@ import org.junit.jupiter.api.DisplayName;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
+
 import java.text.SimpleDateFormat;
 import java.util.*;
 
 import static io.restassured.RestAssured.given;
+import static io.restassured.module.jsv.JsonSchemaValidator.matchesJsonSchemaInClasspath;
+import static org.hamcrest.Matchers.containsString;
+import static org.hamcrest.Matchers.hasItem;
 
 
 public class PositiveTests{
@@ -67,6 +71,7 @@ public class PositiveTests{
                 .when()
                 .get()
                 .then()
+                .body(matchesJsonSchemaInClasspath("genderResponseSchema.json"))
                 .extract().body().as(GenderData.class);
         Assert.assertTrue(genderData.isCountForVladislav(HelperData.cyrillicName));
         Assert.assertTrue(genderData.isMale());

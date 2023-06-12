@@ -28,7 +28,10 @@ public class Specifications {
     public static ResponseSpecification responseSpecOK200(){
         return new ResponseSpecBuilder()
                 .expectStatusCode(200)
-                .expectBody("$", hasKey("count"))
+//                .expectBody("$", hasKey("count"))
+//                .expectBody("$", hasKey("gender"))
+//                .expectBody("$", hasKey("name"))
+//                .expectBody("$", hasKey("probability"))
                 .build();
     }
     public static ResponseSpecification responseSpecBadRequest400(){

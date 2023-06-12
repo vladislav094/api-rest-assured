@@ -1,0 +1,23 @@
+{
+  "type": "object",
+  "required": [
+    "count",
+    "gender",
+    "name",
+    "probability"
+  ],
+  "properties": {
+    "count": {
+      "type": "integer"
+    },
+    "gender": {
+      "type": "string"
+    },
+    "name": {
+      "type": "string"
+    },
+    "probability": {
+      "type": "number"
+    }
+  }
+}
