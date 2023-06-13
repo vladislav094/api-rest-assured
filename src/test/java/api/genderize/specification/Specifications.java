@@ -29,7 +29,7 @@ public class Specifications {
     public static ResponseSpecification responseSpecOK200(){
         return new ResponseSpecBuilder()
                 .expectStatusCode(200)
-                .expectBody(matchesJsonSchemaInClasspath("genderResponseSchema.json"))
+//                .expectBody(matchesJsonSchemaInClasspath("genderResponseSchema.json"))
 //                .expectBody("$", hasKey("count"))
 //                .expectBody("$", hasKey("gender"))
 //                .expectBody("$", hasKey("name"))

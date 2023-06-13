@@ -28,10 +28,9 @@ public class PositiveTests{
      annotation @BeforeClass and put the baseURL there.
      Or define it in this class as shown below
     */
-//    private final static String URL = "https://api.genderize.io/";
 
     @Test
-    public void checkSuccessResultWithParameter(){
+    public void checkSuccessDetermineGenderData(){
         /*
         Checking the response body for valid data. We check that the data is coming, the values correspond to the expected
         QueryParameters.keyName = "name"
@@ -65,9 +64,8 @@ public class PositiveTests{
                 .when()
                 .get()
                 .then()
-//                .body(matchesJsonSchemaInClasspath("genderResponseSchema.json"))
                 .extract().body().as(GenderData.class);
-        Assert.assertTrue(HelperMethods.isCyrillicAlphabetName(genderData.getName()));
+        Assert.assertTrue(HelperMethods.isCyrillicName(genderData.getName()));
 //        Assert.assertTrue(genderData.isCountForVladislav(HelperData.cyrillicName));
 //        Assert.assertTrue(genderData.getGender().isMale());
 //        Assert.assertTrue(genderData.isVladislavName(HelperData.cyrillicName));

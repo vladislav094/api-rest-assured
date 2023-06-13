@@ -37,9 +37,9 @@ public class GenderData{
         return probability;
     }
 
-//    public boolean isMale(){
-//        return ResponseValues.valueGenderMale.equals(this.getGender());
-//    }
+    public boolean isMale(){
+        return ResponseValues.valueGenderMale.equals(this.getGender());
+    }
     public boolean isFemale(){
         return ResponseValues.valueGenderFemale.equals(this.getGender());
     }
