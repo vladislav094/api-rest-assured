@@ -1,4 +1,4 @@
-package api.genderize.genders;
+package api.genderize.genders.pojo;
 
 public class MissingParameter {
     public String error;

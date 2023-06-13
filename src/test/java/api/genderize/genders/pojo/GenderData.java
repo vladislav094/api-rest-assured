@@ -1,21 +1,23 @@
-package api.genderize.genders;
+package api.genderize.genders.pojo;
+import api.genderize.genders.QueryParameters;
+import api.genderize.genders.ResponseValues;
 import api.genderize.helpers.HelperData;
 
 import java.io.Serializable;
 
 public class GenderData{
-    private Integer count;
-    private String gender;
-    private String name;
-    private Float probability;
+    protected int count;
+    protected String gender;
+    protected String name;
+    protected float probability;
 
-    public GenderData(int count, String gender, String name, float probability) {
+    protected GenderData(int count, String gender, String name, float probability) {
         this.count = count;
         this.gender = gender;
         this.name = name;
         this.probability = probability;
     }
-    public GenderData(){
+    protected GenderData(){
         super();
     }
     // All Getters
@@ -35,9 +37,9 @@ public class GenderData{
         return probability;
     }
 
-    public boolean isMale(){
-        return ResponseValues.valueGenderMale.equals(this.getGender());
-    }
+//    public boolean isMale(){
+//        return ResponseValues.valueGenderMale.equals(this.getGender());
+//    }
     public boolean isFemale(){
         return ResponseValues.valueGenderFemale.equals(this.getGender());
     }

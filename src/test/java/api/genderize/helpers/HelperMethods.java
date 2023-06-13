@@ -34,4 +34,16 @@ public class HelperMethods {
         return headersName;
     }
 
+    public static boolean isCyrillicAlphabetName(String name){
+        for (int i = 0; i < name.length(); i++) {
+            char temp = name.charAt(i);
+            if (!String.valueOf(Character.UnicodeBlock.of(temp)).equals("CYRILLIC")){
+                return false;
+            }
+        }
+        return true;
+    }
+//public static void main(String[] args) {
+//    System.out.println(isCyrillicAlphabetName("влад"));
+//}
 }

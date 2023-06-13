@@ -1,16 +1,15 @@
 package api.genderize;
 
 import api.genderize.genders.*;
+import api.genderize.genders.pojo.GenderData;
+import api.genderize.genders.pojo.MissingParameter;
 import api.genderize.specification.Specifications;
 import io.restassured.RestAssured;
-import io.restassured.http.Header;
-import io.restassured.http.Headers;
 import io.restassured.response.Response;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 public class NegativeTests extends Specifications {

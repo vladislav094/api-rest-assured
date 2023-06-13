@@ -10,6 +10,7 @@ import io.restassured.specification.RequestSpecification;
 import io.restassured.specification.ResponseSpecification;
 
 import static io.restassured.RestAssured.given;
+import static io.restassured.module.jsv.JsonSchemaValidator.matchesJsonSchemaInClasspath;
 import static org.hamcrest.collection.IsMapContaining.hasKey;
 
 public class Specifications {
@@ -28,6 +29,7 @@ public class Specifications {
     public static ResponseSpecification responseSpecOK200(){
         return new ResponseSpecBuilder()
                 .expectStatusCode(200)
+                .expectBody(matchesJsonSchemaInClasspath("genderResponseSchema.json"))
 //                .expectBody("$", hasKey("count"))
 //                .expectBody("$", hasKey("gender"))
 //                .expectBody("$", hasKey("name"))
