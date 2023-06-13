@@ -38,7 +38,7 @@ public class PositiveTests{
         HelperData.latinName = "latin"
          */
         Specifications.installSpecification(Specifications.requestSpec(), Specifications.responseSpecOK200());
-        GenderChecking genderData = given()
+        GenderData genderData = given()
                 .queryParam(QueryParameters.keyName, QueryParameters.valueLatinName)
                 .when()
                 .get()

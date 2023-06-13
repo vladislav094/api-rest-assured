@@ -36,18 +36,6 @@ public class HelperMethods {
         return headersName;
     }
 
-    public static String determineAlphabet(String alphabet) {
-        String result = "";
-        List<Character> arrayCharacters = new ArrayList<>();
-        for (int i = 0; i < alphabet.length(); i++) {
-            char temp = alphabet.charAt(i);
-            arrayCharacters.add(temp);
-        }
-        arrayCharacters.forEach(x-> Assert.assertEquals(String.valueOf(Character.UnicodeBlock.of(x)), Character.UnicodeBlock.CYRILLIC));
-
-        return result;
-    }
-
     public static boolean isCyrillicName(String name){
         List<Character> arrayCharacters = new ArrayList<>();
         for (int i = 0; i < name.length(); i++) {
@@ -57,9 +45,15 @@ public class HelperMethods {
         arrayCharacters.forEach(x-> Assert.assertEquals(Character.UnicodeBlock.of(x), Character.UnicodeBlock.CYRILLIC));
         return true;
     }
-//    public static boolean isLatinName(String name) {
-//        for ()
-//    }
+    public static boolean isLatinName(String name) {
+        List<Character> arrayCharacters = new ArrayList<>();
+        for (int i = 0; i < name.length(); i++) {
+            char temp = name.charAt(i);
+            arrayCharacters.add(temp);
+        }
+        arrayCharacters.forEach(x-> Assert.assertEquals(Character.UnicodeBlock.of(x), Character.UnicodeBlock.BASIC_LATIN));
+        return true;
+    }
 
 //public static void main(String[] args) {
 //    System.out.println(isCyrillicName("влад"));
