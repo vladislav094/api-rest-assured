@@ -76,7 +76,7 @@ public class ExcelReader {
         File file = new File(excelFilePath);
         FileInputStream fileInputStream = new FileInputStream(file);
         book = new XSSFWorkbook(fileInputStream);
-        sheet = book.getSheet("latinMaleNames");
+        sheet = book.getSheet(sheetName);
         int numberOfColumn = xlsxCountColumn();
         int columnOfRow = xlsxCountRow();
         String[][] data = new String[columnOfRow-1][numberOfColumn];
