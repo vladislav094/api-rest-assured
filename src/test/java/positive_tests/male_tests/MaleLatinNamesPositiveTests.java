@@ -17,7 +17,7 @@ public class MaleLatinNamesPositiveTests {
         /*
         We check that all objects in the response have a gender corresponding to the passed name in the parameter. In this case, the male sex is expected.
          */
-        Specifications.installSpecification(Specifications.requestSpec(), Specifications.responseSpecOK200());
+        Specifications.installSpecification(Specifications.requestSpec(), Specifications.oneItemInResponseSpecOK200());
         GenderData genderData = given()
                 .queryParam(QueryParameters.keyName, name)
                 .when()
@@ -30,7 +30,7 @@ public class MaleLatinNamesPositiveTests {
     @Test(dataProvider = "latinMaleNames", dataProviderClass = DataDrivenDebug.class)
     public void checkThatAllLatinNamesIsMale(String count ,String gender,
                                                                String name, String probability){
-        Specifications.installSpecification(Specifications.requestSpec(), Specifications.responseSpecOK200());
+        Specifications.installSpecification(Specifications.requestSpec(), Specifications.oneItemInResponseSpecOK200());
         GenderData genderData = given()
                 .queryParam(QueryParameters.keyName, name)
                 .when()
@@ -44,7 +44,7 @@ public class MaleLatinNamesPositiveTests {
     public void checkThatAllCountOfEachMaleLatinNamesCorrespondTable(String count ,String gender,
                                                             String name, String probability) {
         int intCount = Double.valueOf(count).intValue();
-        Specifications.installSpecification(Specifications.requestSpec(), Specifications.responseSpecOK200());
+        Specifications.installSpecification(Specifications.requestSpec(), Specifications.oneItemInResponseSpecOK200());
         GenderData genderData = given()
                 .queryParam(QueryParameters.keyName, name)
                 .when()

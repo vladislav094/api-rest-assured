@@ -13,7 +13,7 @@ public class FemaleLatinNamesPositiveTests {
     @Test(dataProvider = "latinFemaleNames", dataProviderClass = DataDrivenDebug.class)
     public void checkThatAllNamesIsFemale(String count ,String gender,
                                           String name, String probability){
-        Specifications.installSpecification(Specifications.requestSpec(), Specifications.responseSpecOK200());
+        Specifications.installSpecification(Specifications.requestSpec(), Specifications.oneItemInResponseSpecOK200());
         GenderData genderData = given()
                 .queryParam(QueryParameters.keyName, name)
                 .when()

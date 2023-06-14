@@ -1,6 +1,5 @@
 package api.genderize.static_data;
 import org.testng.annotations.DataProvider;
-import org.testng.annotations.Test;
 
 public class DataDrivenDebug {
 
@@ -8,37 +7,38 @@ public class DataDrivenDebug {
 //    public Object[][] dataProviderMethod(){
 //        return new Object[][] {{"data-one"}, {"data-two"}};
 //    }
-    public final static String xlsxLatinNames = "src/main/resources/gender_data/latinNames.xlsx";
-    public final static String xlsxCyrillicNames = "src/main/resources/gender_data/cyrillicNames.xlsx";
-    public final static String pageWithLatinMaleNames = "latinMaleNames";
-    public final static String pageWithLatinFemaleNames = "latinFemaleNames";
-    public final static String pageWithCyrillicMaleNames = "cyrillicMaleNames";
-    public final static String pageWithCyrillicFemaleNames = "cyrillicFemaleNames";
+    public final static String xlsxFileLatinNames = "src/main/resources/gender_data/latinNames.xlsx";
+    public final static String xlsxFileCyrillicNames = "src/main/resources/gender_data/cyrillicNames.xlsx";
+    public final static String pageInTableWithLatinMaleNames = "latinMaleNames";
+    public final static String pageInTableWithLatinFemaleNames = "latinFemaleNames";
+    public final static String pageInTableWithCyrillicMaleNames = "cyrillicMaleNames";
+    public final static String pageInTableWithCyrillicFemaleNames = "cyrillicFemaleNames";
 
 
     @DataProvider(name = "latinMaleNames")
     public Object[][] latinMaleNamesDataProvider() throws Exception {
-        ExcelReader excelReader = new ExcelReader(xlsxLatinNames, pageWithLatinMaleNames);
+        ExcelReader excelReader = new ExcelReader(xlsxFileLatinNames, pageInTableWithLatinMaleNames);
         return excelReader.getSheetDataForTDD();
     }
 
     @DataProvider(name = "latinFemaleNames")
     public Object[][] latinFemaleNamesDataProvider() throws Exception {
-        ExcelReader excelReader = new ExcelReader(xlsxLatinNames, pageWithLatinFemaleNames);
+        ExcelReader excelReader = new ExcelReader(xlsxFileLatinNames, pageInTableWithLatinFemaleNames);
         return excelReader.getCustomSheetDataForTDD();
     }
 
     @DataProvider(name = "cyrillicMaleNames")
     public Object[][] cyrillicMaleNamesDataProvider() throws Exception {
-        ExcelReader excelReader = new ExcelReader(xlsxCyrillicNames, pageWithCyrillicMaleNames);
+        ExcelReader excelReader = new ExcelReader(xlsxFileCyrillicNames, pageInTableWithCyrillicMaleNames);
         return excelReader.getCustomSheetDataForTDD();
     }
 
     @DataProvider(name = "cyrillicFemaleNames")
     public Object[][] cyrillicFemaleNamesDataProvider() throws Exception {
-        ExcelReader excelReader = new ExcelReader(xlsxCyrillicNames, pageWithCyrillicFemaleNames);
+        ExcelReader excelReader = new ExcelReader(xlsxFileCyrillicNames, pageInTableWithCyrillicFemaleNames);
         return excelReader.getCustomSheetDataForTDD();
     }
+
 
 
 //    @Test(dataProvider = "users")

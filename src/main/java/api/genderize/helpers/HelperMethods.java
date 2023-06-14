@@ -5,10 +5,14 @@ import io.restassured.http.Header;
 import io.restassured.http.Headers;
 import org.testng.Assert;
 
+import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.List;
 
 public class HelperMethods {
+
+    public HelperMethods() {
+    }
 
     public static boolean allExpectedRateLimitHeaders(List<String> myObj){
         /*
@@ -44,10 +48,21 @@ public class HelperMethods {
                 .equals(Character.UnicodeBlock.BASIC_LATIN)).allMatch(c -> c);
     }
 
-public static void main(String[] args) {
-    System.out.println(isCyrillicName("влад"));
-    System.out.println(isLatinName("qwe"));
+    String a = "path";
+    int b = 12;
+
+    public void printParameters(String someString, int someInt) {
+        System.out.println(someString + " " + someInt);
+    }
+
+
+public static void main(String[] args) throws NoSuchMethodException {
+//    System.out.println(isCyrillicName("влад"));
+//    System.out.println(isLatinName("qwe"));
 //    System.out.println(Character.UnicodeBlock.of('q'));
 //    System.out.println(determineAlphabet("влада"));
+
+    Method method = HelperMethods.class.getMethod("printParameters", String.class, int.class);
+    System.out.println(method);
 }
 }
