@@ -14,16 +14,15 @@ public class HelperMethods {
     public HelperMethods() {
     }
 
-    public static boolean allExpectedRateLimitHeaders(List<String> myObj){
+    public static boolean allExpectedRateLimitHeaders(List<String> myObj) {
         /*
         ResponseValues.expectedXRateLimitHeaders - list with all expected headers
          */
         boolean flag = false;
-        for(String head : ResponseValues.expectedXRateLimitHeaders){
-            if (myObj.contains(head)){
+        for (String head : ResponseValues.expectedXRateLimitHeaders) {
+            if (myObj.contains(head)) {
                 flag = true;
-            }
-            else {
+            } else {
                 flag = false;
                 break;
             }
@@ -31,18 +30,19 @@ public class HelperMethods {
         return flag;
     }
 
-    public static List<String> getListAllHeaders(Headers myHeaders){
+    public static List<String> getListAllHeaders(Headers myHeaders) {
         List<String> headersName = new ArrayList<>();
-        for(Header header: myHeaders){
+        for (Header header : myHeaders) {
             headersName.add(header.getName());
         }
         return headersName;
     }
 
-    public static boolean isCyrillicName(String name){
+    public static boolean isCyrillicName(String name) {
         return name.chars().mapToObj(c -> Character.UnicodeBlock.of(c)
                 .equals(Character.UnicodeBlock.CYRILLIC)).allMatch(c -> c);
     }
+
     public static boolean isLatinName(String name) {
         return name.chars().mapToObj(c -> Character.UnicodeBlock.of(c)
                 .equals(Character.UnicodeBlock.BASIC_LATIN)).allMatch(c -> c);
@@ -55,6 +55,9 @@ public class HelperMethods {
         System.out.println(someString + " " + someInt);
     }
 
+    public static boolean thatLatinMaleNames(Method method) {
+        return method.getName().toLowerCase().contains("latin") && method.getName().toLowerCase().contains("male");
+    }
 
 public static void main(String[] args) throws NoSuchMethodException {
 //    System.out.println(isCyrillicName("влад"));
@@ -63,6 +66,8 @@ public static void main(String[] args) throws NoSuchMethodException {
 //    System.out.println(determineAlphabet("влада"));
 
     Method method = HelperMethods.class.getMethod("printParameters", String.class, int.class);
-    System.out.println(method);
+    if (method.getName().toLowerCase().contains("print") && method.getName().toLowerCase().contains("metr")){
+        System.out.println("da");
+    };
 }
 }

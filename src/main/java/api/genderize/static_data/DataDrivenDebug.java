@@ -1,5 +1,9 @@
 package api.genderize.static_data;
+import api.genderize.helpers.HelperData;
+import api.genderize.helpers.HelperMethods;
 import org.testng.annotations.DataProvider;
+
+import java.lang.reflect.Method;
 
 public class DataDrivenDebug {
 
@@ -15,8 +19,16 @@ public class DataDrivenDebug {
     public final static String pageInTableWithCyrillicFemaleNames = "cyrillicFemaleNames";
 
 
+    public Object[][] debugDataProvider(Method method) throws Exception{
+        String myString = Boolean.toString(HelperMethods.thatLatinMaleNames(method));
+        switch ( HelperMethods.thatLatinMaleNames(method)) {
+
+        }
+    }
+
     @DataProvider(name = "latinMaleNames")
-    public Object[][] latinMaleNamesDataProvider() throws Exception {
+    public Object[][] latinMaleNamesDataProvider(Method method) throws Exception {
+        System.out.println(method.getName());
         ExcelReader excelReader = new ExcelReader(xlsxFileLatinNames, pageInTableWithLatinMaleNames);
         return excelReader.getSheetDataForTDD();
     }
@@ -39,6 +51,9 @@ public class DataDrivenDebug {
         return excelReader.getCustomSheetDataForTDD();
     }
 
+//    public Object[][] dataProvider(){
+//        return new Object[][] {{}}
+//    }
 
 
 //    @Test(dataProvider = "users")
