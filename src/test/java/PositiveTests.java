@@ -181,10 +181,8 @@ public class PositiveTests{
     }
 
     @Test(dataProvider = "maleNames", dataProviderClass = DataDrivenDebug.class)
-    public void checkThatAllNameIsLatin(String id, String name){
-        /*
-        We check that all objects in the response have a gender corresponding to the passed name in the parameter. In this case, the male sex is expected.
-         */
+    public void checkThatAllCountOfMaleNamesCorrespondTable(String count ,String gender,
+                                                           String name, String probability) {
         Specifications.installSpecification(Specifications.requestSpec(), Specifications.responseSpecOK200());
         GenderData genderData = given()
                 .queryParam(QueryParameters.keyName, name)
@@ -192,12 +190,12 @@ public class PositiveTests{
                 .get()
                 .then()
                 .extract().as(GenderData.class);
-        Assert.assertTrue(HelperMethods.isLatinName(genderData.getName()));
-//        Assert.assertTrue(genderData.isFemale());
+        Assert.assertEquals(gender, genderData.getGender());
     }
 
     @Test(dataProvider = "femaleNames", dataProviderClass = DataDrivenDebug.class)
-    public void checkThatAllDetectedAsMaleNames(String id, String name){
+    public void checkThatAllGenderOfFemaleNamesCorrespondTable(String count ,String gender,
+                                                String name, String probability){
         Specifications.installSpecification(Specifications.requestSpec(), Specifications.responseSpecOK200());
         GenderData genderData = given()
                 .queryParam(QueryParameters.keyName, name)
@@ -205,7 +203,10 @@ public class PositiveTests{
                 .get()
                 .then()
                 .extract().as(GenderData.class);
-        Assert.assertTrue(HelperMethods.isLatinName(genderData.getName()));
+        Assert.assertEquals(gender, genderData.getGender());
+//        Assert.assertTrue(HelperMethods.isCyrillicName(genderData.getName()));
 //        Assert.assertTrue(HelperMethods.);
     }
+
+
 }
