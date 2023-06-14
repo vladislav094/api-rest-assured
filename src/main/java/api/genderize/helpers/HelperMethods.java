@@ -6,7 +6,6 @@ import io.restassured.http.Headers;
 import org.testng.Assert;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 public class HelperMethods {
@@ -37,27 +36,18 @@ public class HelperMethods {
     }
 
     public static boolean isCyrillicName(String name){
-        List<Character> arrayCharacters = new ArrayList<>();
-        for (int i = 0; i < name.length(); i++) {
-            char temp = name.charAt(i);
-            arrayCharacters.add(temp);
-        }
-        arrayCharacters.forEach(x-> Assert.assertEquals(Character.UnicodeBlock.of(x), Character.UnicodeBlock.CYRILLIC));
-        return true;
+        return name.chars().mapToObj(c -> Character.UnicodeBlock.of(c)
+                .equals(Character.UnicodeBlock.CYRILLIC)).allMatch(c -> c);
     }
     public static boolean isLatinName(String name) {
-        List<Character> arrayCharacters = new ArrayList<>();
-        for (int i = 0; i < name.length(); i++) {
-            char temp = name.charAt(i);
-            arrayCharacters.add(temp);
-        }
-        arrayCharacters.forEach(x-> Assert.assertEquals(Character.UnicodeBlock.of(x), Character.UnicodeBlock.BASIC_LATIN));
-        return true;
+        return name.chars().mapToObj(c -> Character.UnicodeBlock.of(c)
+                .equals(Character.UnicodeBlock.BASIC_LATIN)).allMatch(c -> c);
     }
 
-//public static void main(String[] args) {
-//    System.out.println(isCyrillicName("влад"));
+public static void main(String[] args) {
+    System.out.println(isCyrillicName("влад"));
+    System.out.println(isLatinName("qwe"));
 //    System.out.println(Character.UnicodeBlock.of('q'));
 //    System.out.println(determineAlphabet("влада"));
-//}
+}
 }

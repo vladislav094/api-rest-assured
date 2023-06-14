@@ -1,10 +1,8 @@
-package api.genderize;
-
-import api.genderize.genders.GenderChecking;
-import api.genderize.genders.pojo.GenderData;
-import api.genderize.helpers.HelperData;
+//import api.genderize.genders.GenderChecking;
 import api.genderize.genders.QueryParameters;
+import api.genderize.helpers.HelperData;
 import api.genderize.helpers.HelperMethods;
+import api.genderize.genders.pojo.GenderData;
 import api.genderize.specification.Specifications;
 import io.restassured.http.Headers;
 import io.restassured.response.Response;
@@ -43,7 +41,7 @@ public class PositiveTests{
                 .when()
                 .get()
                 .then()
-                .extract().as(GenderChecking.class);
+                .extract().as(GenderData.class);
         Assert.assertTrue(genderData.isCountForVladislav(HelperData.latinName));
         Assert.assertTrue(genderData.isMale());
         Assert.assertTrue(genderData.isVladislavName(HelperData.latinName));
@@ -87,7 +85,7 @@ public class PositiveTests{
                 .get()
                 .then()
                 .extract().as(GenderData.class);
-        Assert.assertTrue(genderData.isCountForVladislav(HelperData.latinName));
+        Assert.assertTrue(HelperMethods.isLatinName(genderData.getName()));
 //        Assert.assertTrue(genderData.isMale());
         Assert.assertTrue(genderData.isVladislavName(HelperData.latinName));
         Assert.assertTrue(genderData.isProbabilityForVladislav(HelperData.latinName));

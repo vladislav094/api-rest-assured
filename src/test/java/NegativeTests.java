@@ -1,9 +1,8 @@
-package api.genderize;
-
-import api.genderize.genders.*;
 import api.genderize.genders.pojo.GenderData;
 import api.genderize.genders.pojo.MissingParameter;
 import api.genderize.specification.Specifications;
+import api.genderize.genders.QueryParameters;
+import api.genderize.genders.ResponseValues;
 import io.restassured.RestAssured;
 import io.restassured.response.Response;
 import org.testng.Assert;

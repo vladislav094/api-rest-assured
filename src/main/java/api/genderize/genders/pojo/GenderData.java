@@ -3,8 +3,6 @@ import api.genderize.genders.QueryParameters;
 import api.genderize.genders.ResponseValues;
 import api.genderize.helpers.HelperData;
 
-import java.io.Serializable;
-
 public class GenderData{
     protected int count;
     protected String gender;
