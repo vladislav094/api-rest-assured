@@ -27,7 +27,20 @@ public class PositiveMaleTests {
         Assert.assertTrue(HelperMethods.isLatinName(genderData.getName()));
     }
 
-    @Test(dataProvider = "femaleNames", dataProviderClass = DataDrivenDebug.class)
+    @Test(dataProvider = "maleNames", dataProviderClass = DataDrivenDebug.class)
+    public void checkThatAllNamesIsMale(String count ,String gender,
+                                                               String name, String probability){
+        Specifications.installSpecification(Specifications.requestSpec(), Specifications.responseSpecOK200());
+        GenderData genderData = given()
+                .queryParam(QueryParameters.keyName, name)
+                .when()
+                .get()
+                .then()
+                .extract().as(GenderData.class);
+        Assert.assertEquals(gender, genderData.getGender());
+    }
+
+    @Test(dataProvider = "latinFemaleNames", dataProviderClass = DataDrivenDebug.class)
     public void checkThatAllCountOfMaleNamesCorrespondTable(String count ,String gender,
                                                             String name, String probability) {
         int intCount = Double.valueOf(count).intValue();

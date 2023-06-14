@@ -24,7 +24,7 @@ public class ExcelReader {
         try {
             FileInputStream fileInputStream = new FileInputStream(file);
             book = new XSSFWorkbook(fileInputStream);
-            sheet = book.getSheet("male-names");
+            sheet = book.getSheet("latinMaleNames");
         } catch (IOException e) {
             throw new IOException("Не поддерживаемый формат.");
         }
@@ -76,7 +76,7 @@ public class ExcelReader {
         File file = new File(excelFilePath);
         FileInputStream fileInputStream = new FileInputStream(file);
         book = new XSSFWorkbook(fileInputStream);
-        sheet = book.getSheet("male-names");
+        sheet = book.getSheet("latinMaleNames");
         int numberOfColumn = xlsxCountColumn();
         int columnOfRow = xlsxCountRow();
         String[][] data = new String[columnOfRow-1][numberOfColumn];

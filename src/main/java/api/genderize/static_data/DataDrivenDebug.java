@@ -8,18 +8,19 @@ public class DataDrivenDebug {
 //    public Object[][] dataProviderMethod(){
 //        return new Object[][] {{"data-one"}, {"data-two"}};
 //    }
+    public final static String xlsxLatinNames = "src/main/resources/latinNames.xlsx";
 
     @DataProvider(name = "maleNames")
     public Object[][] dataProviderMaleData() throws Exception {
-        String path = "src/main/resources/menName.xlsx";
+        String path = xlsxLatinNames;
         ExcelReader excelReader = new ExcelReader(path);
         return excelReader.getSheetDataForTDD();
     }
 
-    @DataProvider(name = "femaleNames")
+    @DataProvider(name = "latinFemaleNames")
     public Object[][] dataProviderFemaleData() throws Exception {
-        String path = "src/main/resources/menName.xlsx";
-        ExcelReader excelReader = new ExcelReader(path, "female-names");
+        String path = xlsxLatinNames;
+        ExcelReader excelReader = new ExcelReader(path, "latinFemaleNames");
         return excelReader.getCustomSheetDataForTDD();
     }
 

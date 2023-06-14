@@ -179,34 +179,4 @@ public class PositiveTests{
                 .extract().body().jsonPath().get();
         Assert.assertEquals(genderData.size(), 10);
     }
-
-    @Test(dataProvider = "maleNames", dataProviderClass = DataDrivenDebug.class)
-    public void checkThatAllCountOfMaleNamesCorrespondTable(String count ,String gender,
-                                                           String name, String probability) {
-        Specifications.installSpecification(Specifications.requestSpec(), Specifications.responseSpecOK200());
-        GenderData genderData = given()
-                .queryParam(QueryParameters.keyName, name)
-                .when()
-                .get()
-                .then()
-                .extract().as(GenderData.class);
-        Assert.assertEquals(gender, genderData.getGender());
-    }
-
-    @Test(dataProvider = "femaleNames", dataProviderClass = DataDrivenDebug.class)
-    public void checkThatAllGenderOfFemaleNamesCorrespondTable(String count ,String gender,
-                                                String name, String probability){
-        Specifications.installSpecification(Specifications.requestSpec(), Specifications.responseSpecOK200());
-        GenderData genderData = given()
-                .queryParam(QueryParameters.keyName, name)
-                .when()
-                .get()
-                .then()
-                .extract().as(GenderData.class);
-        Assert.assertEquals(gender, genderData.getGender());
-//        Assert.assertTrue(HelperMethods.isCyrillicName(genderData.getName()));
-//        Assert.assertTrue(HelperMethods.);
-    }
-
-
 }
