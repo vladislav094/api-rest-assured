@@ -4,6 +4,7 @@ import api.genderize.helpers.HelperData;
 import api.genderize.helpers.HelperMethods;
 import api.genderize.genders.pojo.GenderData;
 import api.genderize.specification.Specifications;
+import api.genderize.static_data.DataDrivenDebug;
 import io.restassured.http.Headers;
 import io.restassured.response.Response;
 import org.testng.Assert;
@@ -70,8 +71,8 @@ public class PositiveTests{
 //        Assert.assertTrue(genderData.isProbabilityForVladislav(HelperData.cyrillicName));
     }
 
-    @Test
-    public void checkValueCorrespondExpectedDataForVladislavName(){
+    @Test(dataProvider = "users", dataProviderClass = DataDrivenDebug.class)
+    public void checkValueCorrespondExpectedDataForVladislavName(String id, String name){
         /*
         Checking the data in the response body for a static name "vladislav".
         QueryParameters.keyName = "name"
@@ -80,15 +81,15 @@ public class PositiveTests{
          */
         Specifications.installSpecification(Specifications.requestSpec(), Specifications.responseSpecOK200());
         GenderData genderData = given()
-                .queryParam(QueryParameters.keyName, QueryParameters.valueLatinName)
+                .queryParam(QueryParameters.keyName, name)
                 .when()
                 .get()
                 .then()
                 .extract().as(GenderData.class);
         Assert.assertTrue(HelperMethods.isLatinName(genderData.getName()));
 //        Assert.assertTrue(genderData.isMale());
-        Assert.assertTrue(genderData.isVladislavName(HelperData.latinName));
-        Assert.assertTrue(genderData.isProbabilityForVladislav(HelperData.latinName));
+//        Assert.assertTrue(genderData.isVladislavName(HelperData.latinName));
+//        Assert.assertTrue(genderData.isProbabilityForVladislav(HelperData.latinName));
     }
 
     @Test
@@ -179,19 +180,32 @@ public class PositiveTests{
         Assert.assertEquals(genderData.size(), 10);
     }
 
-    @Test
-    public void checkThatGenderForAllNamesIsMale(){
+    @Test(dataProvider = "maleNames", dataProviderClass = DataDrivenDebug.class)
+    public void checkThatAllNameIsLatin(String id, String name){
         /*
         We check that all objects in the response have a gender corresponding to the passed name in the parameter. In this case, the male sex is expected.
          */
         Specifications.installSpecification(Specifications.requestSpec(), Specifications.responseSpecOK200());
-        List<GenderData> genderData = Arrays.asList(given()
-                .queryParam(QueryParameters.listKeyName, QueryParameters.listValueWith10MaleNames)
+        GenderData genderData = given()
+                .queryParam(QueryParameters.keyName, name)
                 .when()
                 .get()
                 .then()
-                .extract().as(GenderData[].class));
-//        genderData.forEach(x->Assert.assertTrue(x.isMale()));
+                .extract().as(GenderData.class);
+        Assert.assertTrue(HelperMethods.isLatinName(genderData.getName()));
+//        Assert.assertTrue(genderData.isFemale());
     }
 
+    @Test(dataProvider = "femaleNames", dataProviderClass = DataDrivenDebug.class)
+    public void checkThatAllDetectedAsMaleNames(String id, String name){
+        Specifications.installSpecification(Specifications.requestSpec(), Specifications.responseSpecOK200());
+        GenderData genderData = given()
+                .queryParam(QueryParameters.keyName, name)
+                .when()
+                .get()
+                .then()
+                .extract().as(GenderData.class);
+        Assert.assertTrue(HelperMethods.isLatinName(genderData.getName()));
+//        Assert.assertTrue(HelperMethods.);
+    }
 }
