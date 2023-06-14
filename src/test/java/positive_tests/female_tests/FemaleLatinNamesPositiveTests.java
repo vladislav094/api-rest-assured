@@ -10,8 +10,8 @@ import org.testng.annotations.Test;
 import static io.restassured.RestAssured.given;
 
 public class FemaleLatinNamesPositiveTests {
-    @Test(dataProvider = "latinFemaleNames", dataProviderClass = DataDrivenDebug.class)
-    public void checkThatAllNamesIsFemale(String count ,String gender,
+    @Test(dataProvider = "debug", dataProviderClass = DataDrivenDebug.class)
+    public void checkThatAllLatinNamesIsFemale(String count ,String gender,
                                           String name, String probability){
         Specifications.installSpecification(Specifications.requestSpec(), Specifications.oneItemInResponseSpecOK200());
         GenderData genderData = given()

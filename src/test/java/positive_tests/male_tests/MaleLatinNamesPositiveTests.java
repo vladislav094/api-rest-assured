@@ -11,7 +11,7 @@ import org.testng.annotations.Test;
 import static io.restassured.RestAssured.given;
 
 public class MaleLatinNamesPositiveTests {
-    @Test(dataProvider = "latinMaleNames", dataProviderClass = DataDrivenDebug.class)
+    @Test(dataProvider = "debug", dataProviderClass = DataDrivenDebug.class)
     public void checkThatAllMaleNameIsLatin(String count, String gender,
                                         String name, String probability){
         /*

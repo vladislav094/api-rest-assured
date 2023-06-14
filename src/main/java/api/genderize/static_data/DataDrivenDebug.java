@@ -19,11 +19,18 @@ public class DataDrivenDebug {
     public final static String pageInTableWithCyrillicFemaleNames = "cyrillicFemaleNames";
 
 
+    @DataProvider(name = "debug")
     public Object[][] debugDataProvider(Method method) throws Exception{
-        String myString = Boolean.toString(HelperMethods.thatLatinMaleNames(method));
-        switch ( HelperMethods.thatLatinMaleNames(method)) {
-
+        ExcelReader excelReader = null;
+        switch (HelperMethods.defineGenderAndAlphabet(method)){
+            case "latin male":
+                excelReader = new ExcelReader(xlsxFileLatinNames, pageInTableWithLatinMaleNames);
+                return excelReader.getSheetDataForTDD();
+            case "latin female":
+                excelReader = new ExcelReader(xlsxFileLatinNames, pageInTableWithLatinFemaleNames);
+                return excelReader.getCustomSheetDataForTDD();
         }
+        return new Object[][] {excelReader.getSheetDataForTDD()};
     }
 
     @DataProvider(name = "latinMaleNames")

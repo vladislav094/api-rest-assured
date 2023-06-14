@@ -55,8 +55,20 @@ public class HelperMethods {
         System.out.println(someString + " " + someInt);
     }
 
-    public static boolean thatLatinMaleNames(Method method) {
-        return method.getName().toLowerCase().contains("latin") && method.getName().toLowerCase().contains("male");
+    public static String thatLatinMaleNames(Method method) {
+        if (method.getName().toLowerCase().contains("latin") && method.getName().toLowerCase().contains("male")) {
+            return "latin male";
+        }
+        return "";
+    }
+    public static String defineGenderAndAlphabet(Method method) {
+        if (method.getName().toLowerCase().contains("latin") && method.getName().toLowerCase().contains("female")) {
+            return "latin female";
+        }
+        if (method.getName().toLowerCase().contains("latin") && method.getName().toLowerCase().contains("male")) {
+            return "latin male";
+        }
+        return "";
     }
 
 public static void main(String[] args) throws NoSuchMethodException {
