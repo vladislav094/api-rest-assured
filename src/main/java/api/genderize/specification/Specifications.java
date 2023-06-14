@@ -20,7 +20,7 @@ public class Specifications {
                 .setBaseUri(URL)
                 .setContentType(ContentType.JSON)
                 .setAccept(ContentType.JSON)
-//                .log(LogDetail.HEADERS)
+                .log(LogDetail.ALL)
                 .addFilter(new ResponseLoggingFilter())
                 .build();
     }
@@ -28,7 +28,7 @@ public class Specifications {
     public static ResponseSpecification responseSpecOK200(){
         return new ResponseSpecBuilder()
                 .expectStatusCode(200)
-//                .expectBody(matchesJsonSchemaInClasspath("genderResponseSchema.json"))
+                .expectBody(matchesJsonSchemaInClasspath("json_schema/success_response/one_object_with_gender_data.json"))
                 .build();
     }
     public static ResponseSpecification responseSpecBadRequest400(){

@@ -10,8 +10,8 @@ import org.testng.annotations.Test;
 
 import static io.restassured.RestAssured.given;
 
-public class PositiveMaleTests {
-    @Test(dataProvider = "maleNames", dataProviderClass = DataDrivenDebug.class)
+public class MaleLatinNamesPositiveTests {
+    @Test(dataProvider = "latinMaleNames", dataProviderClass = DataDrivenDebug.class)
     public void checkThatAllMaleNameIsLatin(String count, String gender,
                                         String name, String probability){
         /*
@@ -27,8 +27,8 @@ public class PositiveMaleTests {
         Assert.assertTrue(HelperMethods.isLatinName(genderData.getName()));
     }
 
-    @Test(dataProvider = "maleNames", dataProviderClass = DataDrivenDebug.class)
-    public void checkThatAllNamesIsMale(String count ,String gender,
+    @Test(dataProvider = "latinMaleNames", dataProviderClass = DataDrivenDebug.class)
+    public void checkThatAllLatinNamesIsMale(String count ,String gender,
                                                                String name, String probability){
         Specifications.installSpecification(Specifications.requestSpec(), Specifications.responseSpecOK200());
         GenderData genderData = given()
@@ -40,8 +40,8 @@ public class PositiveMaleTests {
         Assert.assertEquals(gender, genderData.getGender());
     }
 
-    @Test(dataProvider = "latinFemaleNames", dataProviderClass = DataDrivenDebug.class)
-    public void checkThatAllCountOfMaleNamesCorrespondTable(String count ,String gender,
+    @Test(dataProvider = "latinMaleNames", dataProviderClass = DataDrivenDebug.class)
+    public void checkThatAllCountOfEachMaleLatinNamesCorrespondTable(String count ,String gender,
                                                             String name, String probability) {
         int intCount = Double.valueOf(count).intValue();
         Specifications.installSpecification(Specifications.requestSpec(), Specifications.responseSpecOK200());

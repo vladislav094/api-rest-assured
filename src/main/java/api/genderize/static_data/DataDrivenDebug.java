@@ -8,22 +8,35 @@ public class DataDrivenDebug {
 //    public Object[][] dataProviderMethod(){
 //        return new Object[][] {{"data-one"}, {"data-two"}};
 //    }
-    public final static String xlsxLatinNames = "src/main/resources/latinNames.xlsx";
+    public final static String xlsxLatinNames = "src/main/resources/gender_data/latinNames.xlsx";
+    public final static String xlsxCyrillicNames = "src/main/resources/gender_data/cyrillicNames.xlsx";
     public final static String pageWithLatinMaleNames = "latinMaleNames";
     public final static String pageWithLatinFemaleNames = "latinFemaleNames";
+    public final static String pageWithCyrillicMaleNames = "cyrillicMaleNames";
+    public final static String pageWithCyrillicFemaleNames = "cyrillicFemaleNames";
 
 
-    @DataProvider(name = "maleNames")
-    public Object[][] dataProviderMaleData() throws Exception {
-        String path = xlsxLatinNames;
-        ExcelReader excelReader = new ExcelReader(path, pageWithLatinMaleNames);
+    @DataProvider(name = "latinMaleNames")
+    public Object[][] latinMaleNamesDataProvider() throws Exception {
+        ExcelReader excelReader = new ExcelReader(xlsxLatinNames, pageWithLatinMaleNames);
         return excelReader.getSheetDataForTDD();
     }
 
     @DataProvider(name = "latinFemaleNames")
-    public Object[][] dataProviderFemaleData() throws Exception {
-        String path = xlsxLatinNames;
-        ExcelReader excelReader = new ExcelReader(path, pageWithLatinFemaleNames);
+    public Object[][] latinFemaleNamesDataProvider() throws Exception {
+        ExcelReader excelReader = new ExcelReader(xlsxLatinNames, pageWithLatinFemaleNames);
+        return excelReader.getCustomSheetDataForTDD();
+    }
+
+    @DataProvider(name = "cyrillicMaleNames")
+    public Object[][] cyrillicMaleNamesDataProvider() throws Exception {
+        ExcelReader excelReader = new ExcelReader(xlsxCyrillicNames, pageWithCyrillicMaleNames);
+        return excelReader.getCustomSheetDataForTDD();
+    }
+
+    @DataProvider(name = "cyrillicFemaleNames")
+    public Object[][] cyrillicFemaleNamesDataProvider() throws Exception {
+        ExcelReader excelReader = new ExcelReader(xlsxCyrillicNames, pageWithCyrillicFemaleNames);
         return excelReader.getCustomSheetDataForTDD();
     }
 

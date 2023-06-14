@@ -1,0 +1,235 @@
+{
+  "type": "array",
+  "items": [
+    {
+      "type": "object",
+      "properties": {
+        "count": {
+          "type": "integer"
+        },
+        "gender": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        },
+        "probability": {
+          "type": "integer"
+        }
+      },
+      "required": [
+        "count",
+        "gender",
+        "name",
+        "probability"
+      ]
+    },
+    {
+      "type": "object",
+      "properties": {
+        "count": {
+          "type": "integer"
+        },
+        "gender": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        },
+        "probability": {
+          "type": "integer"
+        }
+      },
+      "required": [
+        "count",
+        "gender",
+        "name",
+        "probability"
+      ]
+    },
+    {
+      "type": "object",
+      "properties": {
+        "count": {
+          "type": "integer"
+        },
+        "gender": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        },
+        "probability": {
+          "type": "integer"
+        }
+      },
+      "required": [
+        "count",
+        "gender",
+        "name",
+        "probability"
+      ]
+    },
+    {
+      "type": "object",
+      "properties": {
+        "count": {
+          "type": "integer"
+        },
+        "gender": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        },
+        "probability": {
+          "type": "integer"
+        }
+      },
+      "required": [
+        "count",
+        "gender",
+        "name",
+        "probability"
+      ]
+    },
+    {
+      "type": "object",
+      "properties": {
+        "count": {
+          "type": "integer"
+        },
+        "gender": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        },
+        "probability": {
+          "type": "integer"
+        }
+      },
+      "required": [
+        "count",
+        "gender",
+        "name",
+        "probability"
+      ]
+    },
+    {
+      "type": "object",
+      "properties": {
+        "count": {
+          "type": "integer"
+        },
+        "gender": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        },
+        "probability": {
+          "type": "integer"
+        }
+      },
+      "required": [
+        "count",
+        "gender",
+        "name",
+        "probability"
+      ]
+    },
+    {
+      "type": "object",
+      "properties": {
+        "count": {
+          "type": "integer"
+        },
+        "gender": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        },
+        "probability": {
+          "type": "integer"
+        }
+      },
+      "required": [
+        "count",
+        "gender",
+        "name",
+        "probability"
+      ]
+    },
+    {
+      "type": "object",
+      "properties": {
+        "count": {
+          "type": "integer"
+        },
+        "gender": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        },
+        "probability": {
+          "type": "integer"
+        }
+      },
+      "required": [
+        "count",
+        "gender",
+        "name",
+        "probability"
+      ]
+    },
+    {
+      "type": "object",
+      "properties": {
+        "count": {
+          "type": "integer"
+        },
+        "gender": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        },
+        "probability": {
+          "type": "integer"
+        }
+      },
+      "required": [
+        "count",
+        "gender",
+        "name",
+        "probability"
+      ]
+    },
+    {
+      "type": "object",
+      "properties": {
+        "count": {
+          "type": "integer"
+        },
+        "gender": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        },
+        "probability": {
+          "type": "integer"
+        }
+      },
+      "required": [
+        "count",
+        "gender",
+        "name",
+        "probability"
+      ]
+    }
+  ]
+}
