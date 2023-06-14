@@ -13,7 +13,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class NegativeTests extends Specifications {
-
     /*
      Identified baseURL in the public class Specifications.
      We can also create an setUp() method with an
