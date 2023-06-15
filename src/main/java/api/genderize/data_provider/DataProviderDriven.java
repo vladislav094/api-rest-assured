@@ -5,7 +5,7 @@ import org.testng.annotations.DataProvider;
 import javax.annotation.CheckForNull;
 import java.lang.reflect.Method;
 
-public class DataDrivenDebug {
+public class DataProviderDriven {
 
     public final static String XMLFileLatinNames = "src/main/resources/gender_data/latinNames.xlsx";
     public final static String XMLFileCyrillicNames = "src/main/resources/gender_data/cyrillicNames.xlsx";

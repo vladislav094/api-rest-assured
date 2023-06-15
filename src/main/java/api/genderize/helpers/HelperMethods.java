@@ -1,10 +1,9 @@
 package api.genderize.helpers;
 
-import api.genderize.data_provider.DataDrivenDebug;
+import api.genderize.data_provider.DataProviderDriven;
 import api.genderize.genders.ResponseValues;
 import io.restassured.http.Header;
 import io.restassured.http.Headers;
-import org.testng.Assert;
 
 import java.lang.reflect.Method;
 import java.util.ArrayList;
@@ -58,16 +57,16 @@ public class HelperMethods {
      */
     public static String defineGenderAndAlphabet(Method method) {
         if (method.getDeclaringClass().getName().toLowerCase().contains("latin") && method.getDeclaringClass().getName().toLowerCase().contains("female")) {
-            return DataDrivenDebug.pageInTableWithLatinFemaleNames;
+            return DataProviderDriven.pageInTableWithLatinFemaleNames;
         }
         if (method.getDeclaringClass().getName().toLowerCase().contains("latin") && method.getDeclaringClass().getName().toLowerCase().contains("male")) {
-            return DataDrivenDebug.pageInTableWithLatinMaleNames;
+            return DataProviderDriven.pageInTableWithLatinMaleNames;
         }
         if (method.getDeclaringClass().getName().toLowerCase().contains("cyrillic") && method.getDeclaringClass().getName().toLowerCase().contains("male")) {
-            return DataDrivenDebug.pageInTableWithCyrillicMaleNames;
+            return DataProviderDriven.pageInTableWithCyrillicMaleNames;
         }
         if (method.getDeclaringClass().getName().toLowerCase().contains("cyrillic") && method.getDeclaringClass().getName().toLowerCase().contains("female")) {
-            return DataDrivenDebug.pageInTableWithCyrillicFemaleNames;
+            return DataProviderDriven.pageInTableWithCyrillicFemaleNames;
         }
         return "";
     }

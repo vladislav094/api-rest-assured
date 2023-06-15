@@ -4,7 +4,7 @@ import api.genderize.helpers.HelperData;
 import api.genderize.helpers.HelperMethods;
 import api.genderize.genders.pojo.GenderData;
 import api.genderize.specification.Specifications;
-import api.genderize.data_provider.DataDrivenDebug;
+import api.genderize.data_provider.DataProviderDriven;
 import io.restassured.http.Headers;
 import io.restassured.response.Response;
 import org.testng.Assert;
@@ -70,7 +70,7 @@ public class PositiveTests{
 //        Assert.assertTrue(genderData.isProbabilityForVladislav(HelperData.cyrillicName));
     }
 
-    @Test(dataProvider = "users", dataProviderClass = DataDrivenDebug.class)
+    @Test(dataProvider = "users", dataProviderClass = DataProviderDriven.class)
     public void checkValueCorrespondExpectedDataForVladislavName(String id, String name){
         /*
         Checking the data in the response body for a static name "vladislav".
