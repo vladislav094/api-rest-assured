@@ -34,8 +34,7 @@ public class DataDrivenDebug {
     }
 
     @DataProvider(name = "latinMaleNames")
-    public Object[][] latinMaleNamesDataProvider(Method method) throws Exception {
-        System.out.println(method.getName());
+    public Object[][] latinMaleNamesDataProvider() throws Exception {
         ExcelReader excelReader = new ExcelReader(xlsxFileLatinNames, pageInTableWithLatinMaleNames);
         return excelReader.getSheetDataForTDD();
     }
