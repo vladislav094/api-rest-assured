@@ -21,21 +21,24 @@ public class Specifications {
                 .setContentType(ContentType.JSON)
                 .setAccept(ContentType.JSON)
                 .log(LogDetail.ALL)
-//                .log(LogDetail.URI).log(LogDetail.BODY)
                 .addFilter(new ResponseLoggingFilter())
                 .build();
     }
 
-    public static ResponseSpecification responseSpecOK200(){
+    public static ResponseSpecification oneItemInResponseSpecOK200(){
         return new ResponseSpecBuilder()
                 .expectStatusCode(200)
-//                .expectBody(matchesJsonSchemaInClasspath("genderResponseSchema.json"))
-//                .expectBody("$", hasKey("count"))
-//                .expectBody("$", hasKey("gender"))
-//                .expectBody("$", hasKey("name"))
-//                .expectBody("$", hasKey("probability"))
+                .expectBody(matchesJsonSchemaInClasspath("json_schema/success_response/one_object_with_gender_data.json"))
                 .build();
     }
+
+    public static ResponseSpecification tenItemsInResponseSpecOK200(){
+        return new ResponseSpecBuilder()
+                .expectStatusCode(200)
+                .expectBody(matchesJsonSchemaInClasspath("json_schema/success_response/ten_objects_with_gender_data.json"))
+                .build();
+    }
+
     public static ResponseSpecification responseSpecBadRequest400(){
         return new ResponseSpecBuilder()
                 .expectStatusCode(400)
