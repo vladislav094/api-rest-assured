@@ -49,6 +49,13 @@ public class HelperMethods {
                 .equals(Character.UnicodeBlock.BASIC_LATIN)).allMatch(c -> c);
     }
 
+    /*
+    Данный метод принимает на вход в качестве аргумента другой метод.
+    Извлекается название класса в котором находится метод и выполняется
+    првоерка на совпадения с условиями. В зависимости от результатов
+    будет возвращена определенная строка, которая соответствует таблице
+    с тестовыми данными для DataProvider.
+     */
     public static String defineGenderAndAlphabet(Method method) {
         if (method.getDeclaringClass().getName().toLowerCase().contains("latin") && method.getDeclaringClass().getName().toLowerCase().contains("female")) {
             return DataDrivenDebug.pageInTableWithLatinFemaleNames;
@@ -65,18 +72,8 @@ public class HelperMethods {
         return "";
     }
 
-//    public static void myMethod() {
-////        Class<?> enclosingClass = new Object(){}.getClass().getEnclosingClass();
-//        Class<?> enclosingClass = method.getClass().getEnclosingClass();
-//        String className = enclosingClass.getName();
-//        System.out.println("Method is called from class: " + className);
-//    }
 
-public static void main(String[] args) throws NoSuchMethodException {
-//    System.out.println(isCyrillicName("влад"));
-//    System.out.println(isLatinName("qwe"));
-//    System.out.println(Character.UnicodeBlock.of('q'));
-//    System.out.println(determineAlphabet("влада"));
-//    myMethod();
-}
+public static void main(String[] args){
+
+    }
 }
