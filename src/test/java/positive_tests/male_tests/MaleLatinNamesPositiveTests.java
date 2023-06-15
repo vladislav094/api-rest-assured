@@ -28,21 +28,8 @@ public class MaleLatinNamesPositiveTests {
     }
 
     @Test(dataProvider = "generalDataProvider", dataProviderClass = DataProviderDriven.class)
-    public void checkThatAllLatinNamesIsMale(String count ,String gender,
-                                                               String name, String probability){
-        Specifications.installSpecification(Specifications.requestSpec(), Specifications.oneItemInResponseSpecOK200());
-        GenderData genderData = given()
-                .queryParam(QueryParameters.keyName, name)
-                .when()
-                .get()
-                .then()
-                .extract().as(GenderData.class);
-        Assert.assertEquals(gender, genderData.getGender());
-    }
-
-    @Test(dataProvider = "generalDataProvider", dataProviderClass = DataProviderDriven.class)
-    public void checkThatAllCountOfEachMaleLatinNamesCorrespondTable(String count ,String gender,
-                                                            String name, String probability) {
+    public void checkThatEachValueForCountOfMaleLatinNamesCorrespondTable(String count ,String gender,
+                                                                     String name, String probability) {
         int intCount = Double.valueOf(count).intValue();
         Specifications.installSpecification(Specifications.requestSpec(), Specifications.oneItemInResponseSpecOK200());
         GenderData genderData = given()
@@ -53,4 +40,43 @@ public class MaleLatinNamesPositiveTests {
                 .extract().as(GenderData.class);
         Assert.assertEquals(intCount, genderData.getCount());
     }
+
+    @Test(dataProvider = "generalDataProvider", dataProviderClass = DataProviderDriven.class)
+    public void checkSuccessDetermineGenderDataForMaleLatinNames(String count ,String gender,
+                                                               String name, String probability){
+        Specifications.installSpecification(Specifications.requestSpec(), Specifications.oneItemInResponseSpecOK200());
+        GenderData genderData = given()
+                .queryParam(QueryParameters.keyName, name)
+                .when()
+                .get()
+                .then()
+                .extract().as(GenderData.class);
+        Assert.assertEquals(gender, genderData.getGender());
+    }
+    @Test(dataProvider = "generalDataProvider", dataProviderClass = DataProviderDriven.class)
+    public void checkThatEachOfMaleLatinNameInResponseDisplayCorrectly(String count, String gender,
+                                               String name, String probability){
+        Specifications.installSpecification(Specifications.requestSpec(), Specifications.oneItemInResponseSpecOK200());
+        GenderData genderData = given()
+                .queryParam(QueryParameters.keyName, name)
+                .when()
+                .get()
+                .then()
+                .extract().as(GenderData.class);
+        Assert.assertEquals(name, genderData.getName());
+    }
+
+    public void checkThatEachValueForProbabilityOfMaleLatinNamesCorrespondTable(String count, String gender,
+                                                                                String name, String probability){
+        Specifications.installSpecification(Specifications.requestSpec(), Specifications.oneItemInResponseSpecOK200());
+        GenderData genderData = given()
+                .queryParam(QueryParameters.keyName, name)
+                .when()
+                .get()
+                .then()
+                .extract().as(GenderData.class);
+        Assert.assertEquals(name, genderData.getProbability());
+
+    }
+
 }
