@@ -4,7 +4,7 @@ import api.genderize.helpers.HelperData;
 import api.genderize.helpers.HelperMethods;
 import api.genderize.genders.pojo.GenderData;
 import api.genderize.specification.Specifications;
-import api.genderize.static_data.DataDrivenDebug;
+import api.genderize.data_provider.DataDrivenDebug;
 import io.restassured.http.Headers;
 import io.restassured.response.Response;
 import org.testng.Assert;

@@ -1,5 +1,6 @@
 package api.genderize.helpers;
 
+import api.genderize.data_provider.DataDrivenDebug;
 import api.genderize.genders.ResponseValues;
 import io.restassured.http.Header;
 import io.restassured.http.Headers;
@@ -48,38 +49,34 @@ public class HelperMethods {
                 .equals(Character.UnicodeBlock.BASIC_LATIN)).allMatch(c -> c);
     }
 
-    String a = "path";
-    int b = 12;
-
-    public void printParameters(String someString, int someInt) {
-        System.out.println(someString + " " + someInt);
-    }
-
-    public static String thatLatinMaleNames(Method method) {
-        if (method.getName().toLowerCase().contains("latin") && method.getName().toLowerCase().contains("male")) {
-            return "latin male";
-        }
-        return "";
-    }
     public static String defineGenderAndAlphabet(Method method) {
-        if (method.getName().toLowerCase().contains("latin") && method.getName().toLowerCase().contains("female")) {
-            return "latin female";
+        if (method.getDeclaringClass().getName().toLowerCase().contains("latin") && method.getDeclaringClass().getName().toLowerCase().contains("female")) {
+            return DataDrivenDebug.pageInTableWithLatinFemaleNames;
         }
-        if (method.getName().toLowerCase().contains("latin") && method.getName().toLowerCase().contains("male")) {
-            return "latin male";
+        if (method.getDeclaringClass().getName().toLowerCase().contains("latin") && method.getDeclaringClass().getName().toLowerCase().contains("male")) {
+            return DataDrivenDebug.pageInTableWithLatinMaleNames;
+        }
+        if (method.getDeclaringClass().getName().toLowerCase().contains("cyrillic") && method.getDeclaringClass().getName().toLowerCase().contains("male")) {
+            return DataDrivenDebug.pageInTableWithCyrillicMaleNames;
+        }
+        if (method.getDeclaringClass().getName().toLowerCase().contains("cyrillic") && method.getDeclaringClass().getName().toLowerCase().contains("female")) {
+            return DataDrivenDebug.pageInTableWithCyrillicFemaleNames;
         }
         return "";
     }
+
+//    public static void myMethod() {
+////        Class<?> enclosingClass = new Object(){}.getClass().getEnclosingClass();
+//        Class<?> enclosingClass = method.getClass().getEnclosingClass();
+//        String className = enclosingClass.getName();
+//        System.out.println("Method is called from class: " + className);
+//    }
 
 public static void main(String[] args) throws NoSuchMethodException {
 //    System.out.println(isCyrillicName("влад"));
 //    System.out.println(isLatinName("qwe"));
 //    System.out.println(Character.UnicodeBlock.of('q'));
 //    System.out.println(determineAlphabet("влада"));
-
-    Method method = HelperMethods.class.getMethod("printParameters", String.class, int.class);
-    if (method.getName().toLowerCase().contains("print") && method.getName().toLowerCase().contains("metr")){
-        System.out.println("da");
-    };
+//    myMethod();
 }
 }

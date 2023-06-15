@@ -4,14 +4,14 @@ import api.genderize.genders.QueryParameters;
 import api.genderize.genders.pojo.GenderData;
 import api.genderize.helpers.HelperMethods;
 import api.genderize.specification.Specifications;
-import api.genderize.static_data.DataDrivenDebug;
+import api.genderize.data_provider.DataDrivenDebug;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
 import static io.restassured.RestAssured.given;
 
 public class MaleLatinNamesPositiveTests {
-    @Test(dataProvider = "debug", dataProviderClass = DataDrivenDebug.class)
+    @Test(dataProvider = "generalDataProvider", dataProviderClass = DataDrivenDebug.class)
     public void checkThatAllMaleNameIsLatin(String count, String gender,
                                         String name, String probability){
         /*
@@ -27,7 +27,7 @@ public class MaleLatinNamesPositiveTests {
         Assert.assertTrue(HelperMethods.isLatinName(genderData.getName()));
     }
 
-    @Test(dataProvider = "latinMaleNames", dataProviderClass = DataDrivenDebug.class)
+    @Test(dataProvider = "generalDataProvider", dataProviderClass = DataDrivenDebug.class)
     public void checkThatAllLatinNamesIsMale(String count ,String gender,
                                                                String name, String probability){
         Specifications.installSpecification(Specifications.requestSpec(), Specifications.oneItemInResponseSpecOK200());
@@ -40,7 +40,7 @@ public class MaleLatinNamesPositiveTests {
         Assert.assertEquals(gender, genderData.getGender());
     }
 
-    @Test(dataProvider = "latinMaleNames", dataProviderClass = DataDrivenDebug.class)
+    @Test(dataProvider = "generalDataProvider", dataProviderClass = DataDrivenDebug.class)
     public void checkThatAllCountOfEachMaleLatinNamesCorrespondTable(String count ,String gender,
                                                             String name, String probability) {
         int intCount = Double.valueOf(count).intValue();
