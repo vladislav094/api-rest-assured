@@ -1,10 +1,10 @@
 package positive_tests.male_tests;
 
+import api.genderize.data_provider.DataProviderDriven;
 import api.genderize.genders.QueryParameters;
 import api.genderize.genders.pojo.GenderData;
 import api.genderize.helpers.HelperMethods;
 import api.genderize.specification.Specifications;
-import api.genderize.data_provider.DataProviderDriven;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
