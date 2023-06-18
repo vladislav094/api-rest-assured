@@ -1,9 +1,8 @@
-package api.genderize;
-
-import api.genderize.genders.*;
 import api.genderize.genders.pojo.GenderData;
 import api.genderize.genders.pojo.MissingParameter;
 import api.genderize.specification.Specifications;
+import api.genderize.genders.QueryParameters;
+import api.genderize.genders.ResponseValues;
 import io.restassured.RestAssured;
 import io.restassured.response.Response;
 import org.testng.Assert;
@@ -57,7 +56,7 @@ public class NegativeTests extends Specifications {
         /*
         We check the structure of the object in the response body for the request without specifying a value.
          */
-        Specifications.installSpecification(Specifications.requestSpec(), Specifications.responseSpecOK200());
+        Specifications.installSpecification(Specifications.requestSpec(), Specifications.oneItemInResponseSpecOK200());
         GenderData genderData = RestAssured
                 .given()
                 .queryParam(QueryParameters.keyName)
@@ -112,7 +111,7 @@ public class NegativeTests extends Specifications {
         /*
         We check the structure of the response body when trying to pass a value with a space between characters.
          */
-        Specifications.installSpecification(Specifications.requestSpec(), Specifications.responseSpecOK200());
+        Specifications.installSpecification(Specifications.requestSpec(), Specifications.oneItemInResponseSpecOK200());
         GenderData genderData = RestAssured
                 .given()
                 .queryParam(QueryParameters.keyName, "Spa ce")

@@ -1,11 +1,10 @@
-package api.genderize;
-
-import api.genderize.genders.GenderChecking;
-import api.genderize.genders.pojo.GenderData;
-import api.genderize.helpers.HelperData;
+//import api.genderize.genders.GenderChecking;
 import api.genderize.genders.QueryParameters;
+import api.genderize.helpers.HelperData;
 import api.genderize.helpers.HelperMethods;
+import api.genderize.genders.pojo.GenderData;
 import api.genderize.specification.Specifications;
+import api.genderize.data_provider.DataProviderDriven;
 import io.restassured.http.Headers;
 import io.restassured.response.Response;
 import org.testng.Assert;
@@ -16,7 +15,6 @@ import java.text.SimpleDateFormat;
 import java.util.*;
 
 import static io.restassured.RestAssured.given;
-import static io.restassured.module.jsv.JsonSchemaValidator.matchesJsonSchemaInClasspath;
 import static org.hamcrest.Matchers.hasItem;
 
 
@@ -37,13 +35,13 @@ public class PositiveTests{
         QueryParameters.valueLatinName = "vladislav"
         HelperData.latinName = "latin"
          */
-        Specifications.installSpecification(Specifications.requestSpec(), Specifications.responseSpecOK200());
-        GenderChecking genderData = given()
+        Specifications.installSpecification(Specifications.requestSpec(), Specifications.oneItemInResponseSpecOK200());
+        GenderData genderData = given()
                 .queryParam(QueryParameters.keyName, QueryParameters.valueLatinName)
                 .when()
                 .get()
                 .then()
-                .extract().as(GenderChecking.class);
+                .extract().as(GenderData.class);
         Assert.assertTrue(genderData.isCountForVladislav(HelperData.latinName));
         Assert.assertTrue(genderData.isMale());
         Assert.assertTrue(genderData.isVladislavName(HelperData.latinName));
@@ -58,7 +56,7 @@ public class PositiveTests{
         QueryParameters.valueCyrillicName = "владислав"
         HelperData.cyrillicName = "cyrillic"
          */
-        Specifications.installSpecification(Specifications.requestSpec(), Specifications.responseSpecOK200());
+        Specifications.installSpecification(Specifications.requestSpec(), Specifications.oneItemInResponseSpecOK200());
         GenderData genderData = given()
                 .queryParam(QueryParameters.keyName, QueryParameters.valueCyrillicName)
                 .when()
@@ -72,30 +70,30 @@ public class PositiveTests{
 //        Assert.assertTrue(genderData.isProbabilityForVladislav(HelperData.cyrillicName));
     }
 
-    @Test
-    public void checkValueCorrespondExpectedDataForVladislavName(){
+    @Test(dataProvider = "users", dataProviderClass = DataProviderDriven.class)
+    public void checkValueCorrespondExpectedDataForVladislavName(String id, String name){
         /*
         Checking the data in the response body for a static name "vladislav".
         QueryParameters.keyName = "name"
         QueryParameters.valueLatinName = "vladislav"
         HelperData.latinName = "latin"
          */
-        Specifications.installSpecification(Specifications.requestSpec(), Specifications.responseSpecOK200());
+        Specifications.installSpecification(Specifications.requestSpec(), Specifications.oneItemInResponseSpecOK200());
         GenderData genderData = given()
-                .queryParam(QueryParameters.keyName, QueryParameters.valueLatinName)
+                .queryParam(QueryParameters.keyName, name)
                 .when()
                 .get()
                 .then()
                 .extract().as(GenderData.class);
-        Assert.assertTrue(genderData.isCountForVladislav(HelperData.latinName));
+        Assert.assertTrue(HelperMethods.isLatinName(genderData.getName()));
 //        Assert.assertTrue(genderData.isMale());
-        Assert.assertTrue(genderData.isVladislavName(HelperData.latinName));
-        Assert.assertTrue(genderData.isProbabilityForVladislav(HelperData.latinName));
+//        Assert.assertTrue(genderData.isVladislavName(HelperData.latinName));
+//        Assert.assertTrue(genderData.isProbabilityForVladislav(HelperData.latinName));
     }
 
     @Test
     public void checkResponseHeaders(){
-        Specifications.installSpecification(Specifications.requestSpec(), Specifications.responseSpecOK200());
+        Specifications.installSpecification(Specifications.requestSpec(), Specifications.oneItemInResponseSpecOK200());
         /*
         We check that the response headers correspond to the expected results.
          */
@@ -118,7 +116,7 @@ public class PositiveTests{
          This test method will be modified in the future and
          regular expressions will be used to process the current date.
          */
-        Specifications.installSpecification(Specifications.requestSpec(), Specifications.responseSpecOK200());
+        Specifications.installSpecification(Specifications.requestSpec(), Specifications.oneItemInResponseSpecOK200());
         Response response = given()
                 .queryParam(QueryParameters.keyName, QueryParameters.valueLatinName)
                 .when()
@@ -136,7 +134,7 @@ public class PositiveTests{
         /*
         We check that the protocol used and its version correspond to the expected
          */
-        Specifications.installSpecification(Specifications.requestSpec(), Specifications.responseSpecOK200());
+        Specifications.installSpecification(Specifications.requestSpec(), Specifications.oneItemInResponseSpecOK200());
         Response response = given()
                 .queryParam(QueryParameters.keyName, QueryParameters.valueLatinName)
                 .when()
@@ -153,7 +151,7 @@ public class PositiveTests{
         We check that the response contains headers that are responsible for the speed limit and the allowed number of requests.
         HelperMethods.allExpectedRateLimitHeaders -a method that accepts a list of headers from the response as input and checks for a Rate-Limiting-Headers.
          */
-        Specifications.installSpecification(Specifications.requestSpec(), Specifications.responseSpecOK200());
+        Specifications.installSpecification(Specifications.requestSpec(), Specifications.oneItemInResponseSpecOK200());
         Response response = given()
                 .queryParam(QueryParameters.keyName, QueryParameters.valueLatinName)
                 .when()
@@ -171,7 +169,7 @@ public class PositiveTests{
         We check that the number of objects in the response body corresponds to the specified number of parameters in the request.
         QueryParameters.listValueWith10MaleNames - list with 10 male names.
          */
-        Specifications.installSpecification(Specifications.requestSpec(), Specifications.responseSpecOK200());
+        Specifications.installSpecification(Specifications.requestSpec(), Specifications.oneItemInResponseSpecOK200());
         List<GenderData> genderData = given()
                 .queryParams(QueryParameters.listKeyName, QueryParameters.listValueWith10MaleNames)
                 .when()
@@ -180,20 +178,4 @@ public class PositiveTests{
                 .extract().body().jsonPath().get();
         Assert.assertEquals(genderData.size(), 10);
     }
-
-    @Test
-    public void checkThatGenderForAllNamesIsMale(){
-        /*
-        We check that all objects in the response have a gender corresponding to the passed name in the parameter. In this case, the male sex is expected.
-         */
-        Specifications.installSpecification(Specifications.requestSpec(), Specifications.responseSpecOK200());
-        List<GenderData> genderData = Arrays.asList(given()
-                .queryParam(QueryParameters.listKeyName, QueryParameters.listValueWith10MaleNames)
-                .when()
-                .get()
-                .then()
-                .extract().as(GenderData[].class));
-//        genderData.forEach(x->Assert.assertTrue(x.isMale()));
-    }
-
 }

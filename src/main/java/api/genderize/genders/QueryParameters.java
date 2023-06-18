@@ -13,5 +13,5 @@ public class QueryParameters {
     public final static String valueLatinNameCapitalLetter = "Vladislav";
     public final static String listKeyName = "name[]";
     public final static List<String> listValueWith10MaleNames = Arrays.asList("Albert", "Frank",
-            "John", "Harry", "Steve", "Bob", "Michale", "Ted", "Martin", "Greg");
+            "John", "Harry", "Steve", "Bob", "Michael", "Ted", "Martin", "Greg");
 }

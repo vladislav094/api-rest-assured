@@ -3,8 +3,8 @@
 <suite name="First test suite" thread-count="5" parallel="methods">
     <test name="Positive tests">
         <classes>
-            <class name="api.genderize.PositiveTests"></class>
-            <class name="api.genderize.NegativeTests"></class>
+            <class name="PositiveTests"></class>
+            <class name="NegativeTests"></class>
         </classes>
     </test>
 </suite>
